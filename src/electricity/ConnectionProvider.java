@@ -1,4 +1,4 @@
-package org.electricity;
+package electricity;
 
 
 import java.io.FileInputStream;
@@ -62,7 +62,7 @@ public class ConnectionProvider {
             LOGGER.info("==: Inside getConnection Method :==");
 
             // Getting application.properties values:
-            Properties prop = readPropertiesFile("src/main/resources/application.properties");
+            Properties prop = readPropertiesFile("src/application.properties");
 
             // load driver:
             Class.forName(prop.getProperty("database.className"));
