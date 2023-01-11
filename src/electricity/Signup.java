@@ -24,7 +24,7 @@ public class Signup extends JFrame implements ActionListener {
         p1 = new JPanel();
         p1.setBounds(30, 30, 650, 300);
         p1.setLayout(null);
-        p1.setBackground(Color.white);
+        p1.setBackground(Color.WHITE);
         p1.setForeground(new Color(34, 139, 34));
         p1.setBorder(new TitledBorder(new LineBorder(new Color(173, 216, 230), 2), "Create-Account",
                 TitledBorder.LEADING, TitledBorder.TOP, null, new Color(173, 216, 230)));
@@ -115,6 +115,7 @@ public class Signup extends JFrame implements ActionListener {
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         b2.setBounds(300, 290, 120, 30);
+        b2.addActionListener(this);
         p1.add(b2);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/signupImage.png"));

@@ -19,15 +19,22 @@ public class About extends JFrame implements ActionListener {
 
     public About() {
 
+        LOGGER.info("==: About:: Inside About Constructor Method:==");
+
+        // set layout:
         setLayout(null);
+
+        // Create Exist Button and also add some properties:
         JButton b1 = new JButton("Exit");
         add(b1);
         b1.setBounds(180, 430, 120, 20);
         b1.addActionListener(this);
 
+        // Create font:
         Font f = new Font("RALEWAY", Font.BOLD, 180);
         setFont(f);
 
+        // Create String:
         s = "                                    About Projects          \n  "
                 + "\nElectricity Billing System is a software-based application "
                 + "developed in Java programming language. The project aims at serving "
@@ -39,18 +46,22 @@ public class About extends JFrame implements ActionListener {
         ;
 
 
+        // Create TextArea:
         TextArea t1 = new TextArea(s, 10, 40, Scrollbar.VERTICAL);
         t1.setEditable(false);
         t1.setBounds(20,100,450, 300);
 
         add(t1);
 
+        // Create Font:
         Font f1 = new Font("RALEWAY", Font.BOLD, 16);
         t1.setFont(f1);
 
+        // Create contentpane:
         Container contentPane = this.getContentPane();
         t1 = new TextArea();
 
+        // Create Label "About Project":
         JLabel l1 = new JLabel("About Project");
         add(l1);
         l1.setBounds(170, 10, 180, 80);
@@ -69,11 +80,13 @@ public class About extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        LOGGER.info("==: About:: Inside actionPerformed Method :==");
         dispose();
     }
 
 
     public static void main(String[] args) {
+        LOGGER.info("==: About:: Inside main Method:==");
         new About().setVisible(true);
     }
 

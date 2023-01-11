@@ -5,10 +5,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.logging.Logger;
 
 public class MeterInfo extends JFrame implements ActionListener{
+
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(MeterInfo.class));
 
     JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9, l10, l11;
 
@@ -18,47 +23,70 @@ public class MeterInfo extends JFrame implements ActionListener{
 
     MeterInfo(String meter){
 
+        LOGGER.info("==: MeterInfo:: Inside MeterInfo Constructor :==");
+
+        // set the location and size:
         setLocation(600,200);
         setSize(700,500);
-        
+
+        // Create a panel:
         JPanel p = new JPanel();
         p.setLayout(null);
         p.setBackground(new Color(173,216,230));
-        
+
+        // Title of the panel:
         JLabel title = new JLabel("Meter Information");
         title.setBounds(180, 10, 200, 26);
         title.setFont(new Font("Tahoma", Font.PLAIN, 24));
         p.add(title);
-        
+
+        // Label Meter Number:
         l1 = new JLabel("Meter Number");
         l1.setBounds(100, 80, 100, 20);
-        
+
+        // Label Meter Number value:
         l11 = new JLabel(meter);
         l11.setBounds(240, 80, 200, 20);
+
+        // adding label l1, l11 into panel:
         p.add(l1);
         p.add(l11);
-        
+
+
+        // Label Meter Location:
         l2 = new JLabel("Meter Location");
         l2.setBounds(100, 120, 100, 20);
+
+        // Choice Meter Location:
         c1 = new Choice();
         c1.add("Outside");
         c1.add("Inside");
         c1.setBounds(240, 120, 200, 20);
+
+        // adding label and choice to panel:
         p.add(l2);
         p.add(c1);
-        
+
+        // Label Meter Type:
         l3 = new JLabel("Meter Type");
         l3.setBounds(100, 160, 100, 20);
+
+        // Choice Meter Type:
         c2 = new Choice();
         c2.add("Electric Meter");
         c2.add("Solar Meter");
         c2.add("Smart Meter");
         c2.setBounds(240, 160, 200, 20);
+
+        // adding both label and choice to panel:
         p.add(l3);
         p.add(c2);
-        
+
+        // Label Phase Code:
         l5 = new JLabel("Phase Code");
         l5.setBounds(100, 200, 100, 20);
+
+        // Choice Phase Code:
         c3 = new Choice();
         c3.add("011");
         c3.add("022");
@@ -70,50 +98,74 @@ public class MeterInfo extends JFrame implements ActionListener{
         c3.add("088");
         c3.add("099");
         c3.setBounds(240, 200, 200, 20);
+
+        // adding both label and choice to panel:
         p.add(l5);
         p.add(c3);
-        
+
+
+        // Label Bill Type:
         l4 = new JLabel("Bill Type");
         l4.setBounds(100, 240, 100, 20);
+
+        // Choice Bill Type:
         c4 = new Choice();
         c4.add("Normal");
         c4.add("Industrial");
         c4.setBounds(240, 240, 200, 20);
+
+        // adding both label and choice to pannel:
         p.add(l4);
         p.add(c4);
-        
+
+        // Label Days:
         l6 = new JLabel("Days");
         l6.setBounds(100, 280, 100, 20);
-        
+
+        // Label Days value default set to "30 days"
         l9 = new JLabel("30 Days");
         l9.setBounds(240, 280, 200, 20);
+
+        // adding both label to panel:
         p.add(l6);
         p.add(l9);
-        
+
+        // Label Note:
         l7 = new JLabel("Note");
         l7.setBounds(100, 320, 100, 20);
+
+        // Label Note value by default set to be "By Default Bill is calculated for 30 days only":
         l10 = new JLabel("By Default Bill is calculated for 30 days only");
         l10.setBounds(240, 320, 300, 20);
+
+        // adding both label to panel:
         p.add(l7);
         p.add(l10);
-        
+
+
+        // Creating Submit and Cancel Button and set background and foreground color to it:
         b1 = new JButton("Submit");
         b1.setBounds(120, 390, 100, 25);
-        b2 = new JButton("Cancel");
-        b2.setBounds(250, 390, 100, 25);
-        
+
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
-        
+
+        b2 = new JButton("Cancel");
+        b2.setBounds(250, 390, 100, 25);
+
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
-        
+
+        // adding submit and cancel button to panel:
         p.add(b1);
         p.add(b2);
+
         setLayout(new BorderLayout());
-        
+
+        // set panel to center:
         add(p,"Center");
-        
+
+        // Label Image Icon on west side:
         ImageIcon ic1 = new ImageIcon(ClassLoader.getSystemResource("icon/hicon1.jpg"));
         Image i3 = ic1.getImage().getScaledInstance(150, 300,Image.SCALE_DEFAULT);
         ImageIcon ic2 = new ImageIcon(i3);
@@ -123,7 +175,8 @@ public class MeterInfo extends JFrame implements ActionListener{
         add(l8,"West");
         //for changing the color of the whole Frame
         getContentPane().setBackground(Color.WHITE);
-        
+
+        // adding action listener to both submit anc cancel button:
         b1.addActionListener(this);
         b2.addActionListener(this);
     }
@@ -131,8 +184,12 @@ public class MeterInfo extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae){
 
+        LOGGER.info("==: MeterInfo:: Inside actionPerformed Method:==");
+
+        // If click on submit button:
         if(ae.getSource() == b1){
 
+            // Fetch the all the value related to textfield and putting into q1:
             String meter_number = l11.getText();
             String meter_location = c1.getSelectedItem();
             String meter_type = c2.getSelectedItem();
@@ -141,22 +198,36 @@ public class MeterInfo extends JFrame implements ActionListener{
             String days = "30";
 
             String q1 = "insert into meter_info values('"+meter_number+"','"+meter_location+"','"+meter_type+"','"+phase_code+"','"+bill_type+"','"+days+"')";
+
             try{
 
+                // Connection With database:
                 Connection c1 = ConnectionProvider.getConnection();
                 Statement s = c1.createStatement();
+
+                // update the information into meter_info table:
                 s.executeUpdate(q1);
 
+                // after updating the information into meter_info table then simply
+                // one pop-up message is shows "Meter Info Added Successfully":
                 JOptionPane.showMessageDialog(null,"Meter Info Added Successfully");
+
+                // Now simply current window is close:
                 this.setVisible(false);
 
             }catch(Exception ex){
 
                  ex.printStackTrace();
+                 StringWriter errors = new StringWriter();
+                 ex.printStackTrace(new PrintWriter(errors));
+                 LOGGER.info("----MeterInfo:: Getting Exception actionPerformed----"+ex.toString());
 
             }
+
+        // If click on Button Cancel:
         }else if(ae.getSource() == b2){
 
+            // Simply close the current window:
             this.setVisible(false);
 
         }
@@ -164,6 +235,7 @@ public class MeterInfo extends JFrame implements ActionListener{
     
     
     public static void main(String[] args){
+        LOGGER.info("==: MeterInfo:: Inside Main Method :==");
         new MeterInfo("").setVisible(true);
     }
 }

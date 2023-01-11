@@ -119,7 +119,7 @@ public class GenerateBill extends JFrame implements ActionListener{
                 t1.append("\n Meter Rent:                Rs "+rs.getString("meter_rent"));
                 t1.append("\n Service Charge:            Rs "+rs.getString("service_charge"));
                 t1.append("\n Service Tax:               Rs "+rs.getString("service_tax"));
-                t1.append("\n Swachh Bharat Cess:        Rs "+rs.getString("swacch_bharat_cess"));
+                t1.append("\n Swachh Bharat Cess:        Rs "+rs.getString("swachh_bharat_cess"));
                 t1.append("\n Fixed Tax:                 Rs "+rs.getString("fixed_tax"));
                 t1.append("\n");
                 

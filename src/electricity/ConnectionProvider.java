@@ -57,6 +57,7 @@ public class ConnectionProvider {
 
     public static Connection getConnection(){
 
+        Connection con = null;
         try {
 
             LOGGER.info("==: Inside getConnection Method :==");
@@ -68,7 +69,7 @@ public class ConnectionProvider {
             Class.forName(prop.getProperty("database.className"));
 
             // create connection:
-            Connection con = DriverManager.getConnection(prop.getProperty("database.url"), prop.getProperty(
+            con = DriverManager.getConnection(prop.getProperty("database.url"), prop.getProperty(
                     "database.username"), prop.getProperty("database.password"));
 
             LOGGER.info("==: Connection Made Successfully :==" + con);
