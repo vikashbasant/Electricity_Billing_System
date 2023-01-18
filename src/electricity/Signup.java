@@ -8,166 +8,300 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.logging.Logger;
 
 public class Signup extends JFrame implements ActionListener {
 
-    JPanel p1;
-    JTextField t1, t2, t3, t4;
-    Choice c1;
-    JButton b1, b2;
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(Login.class));
 
-    public Signup() {
+
+    JPanel panel;
+    JTextField userNameTextField, nameTextField, passwordPField, meterNumberTextField;
+    Choice createAccountChoice;
+    JButton createButton, backButton;
+
+    public Signup () {
+
+
+        LOGGER.info("==: Signup:: Inside Signup Constructor:==");
+
+        //============================================================================================================//
+
+        // Creating frame with setBounds() function whereas first 2 parameter are location of frame is open and
+        // last 2 parameter are width and height of the frame:
         setBounds(600, 250, 700, 400);
+        getContentPane().setBackground(Color.WHITE);
 
-        p1 = new JPanel();
-        p1.setBounds(30, 30, 650, 300);
-        p1.setLayout(null);
-        p1.setBackground(Color.WHITE);
-        p1.setForeground(new Color(34, 139, 34));
-        p1.setBorder(new TitledBorder(new LineBorder(new Color(173, 216, 230), 2), "Create-Account",
-                TitledBorder.LEADING, TitledBorder.TOP, null, new Color(173, 216, 230)));
-        add(p1);
+        //============================================================================================================//
 
-        JLabel l1 = new JLabel("Username");
-        l1.setForeground(Color.DARK_GRAY);
-        l1.setFont(new Font("Tahoma", Font.BOLD, 14));
-        l1.setBounds(100, 50,100, 20);
-        p1.add(l1);
-
-        t1 = new JTextField();
-        t1.setBounds(260, 50, 150, 20);
-        p1.add(t1);
-
-        JLabel l2 = new JLabel("Name");
-        l2.setForeground(Color.DARK_GRAY);
-        l2.setFont(new Font("Tahoma", Font.BOLD, 14));
-        l2.setBounds(100, 90, 100, 20);
-        p1.add(l2);
-
-        t2 = new JTextField();
-        t2.setBounds(260, 90, 150, 20);
-        p1.add(t2);
+        // JPanel is nothing frame inside frame:
+        // Create JPanel For Create-Account:
+        panel = new JPanel();
+        // set properties of Create-Account for JPanel:
+        panel.setBounds(30, 30, 650, 300);
+        panel.setLayout(null);
+        panel.setBackground(Color.WHITE);
+        panel.setForeground(new Color(0, 102, 102));
+        panel.setBorder(new TitledBorder(new LineBorder(new Color(173, 216, 230), 3), "Create-Account",
+                TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(51, 25, 0)));
+        // add JPanel to frame:
+        add(panel);
 
 
-        JLabel l3 = new JLabel("Password");
-        l3.setForeground(Color.DARK_GRAY);
-        l3.setFont(new Font("Tahoma", Font.BOLD, 14));
-        l3.setBounds(100, 130, 100, 20);
-        p1.add(l3);
+        //============================================================================================================//
 
-        t3 = new JTextField();
-        t3.setBounds(260, 130, 150, 20);
-        p1.add(t3);
+        /*----- JLabel For Username-----*/
+        JLabel userNameLabel = new JLabel("Username");
+        // set properties for Username JLabel:
+        userNameLabel.setForeground(Color.DARK_GRAY);
+        userNameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        userNameLabel.setBounds(100, 50, 100, 20);
+        // added Username JLabel into Panel panel:
+        panel.add(userNameLabel);
+
+        /*------Text Field For Username-----*/
+        userNameTextField = new JTextField();
+        // set properties for Text Field for Username
+        userNameTextField.setBounds(260, 50, 150, 20);
+        userNameTextField.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // added Username Text Field into Panel panel:
+        panel.add(userNameTextField);
+
+        //============================================================================================================//
+
+        /*----JLabel For Name-----*/
+        JLabel nameLabel = new JLabel("Name");
+        // set properties for Name JLabel:
+        nameLabel.setForeground(Color.DARK_GRAY);
+        nameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        nameLabel.setBounds(100, 90, 100, 20);
+        // added Name JLabel into Panel panel:
+        panel.add(nameLabel);
+
+        /*----Text Field For Name----*/
+        nameTextField = new JTextField();
+        nameTextField.setBounds(260, 90, 150, 20);
+        nameTextField.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // added Name Text Field into Panel panel:
+        panel.add(nameTextField);
+
+        //============================================================================================================//
+
+        /*----JLabel For Password----*/
+        JLabel passwordLabel = new JLabel("Password");
+        // set properties for Password JLabel:
+        passwordLabel.setForeground(Color.DARK_GRAY);
+        passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        passwordLabel.setBounds(100, 130, 100, 20);
+        // added Password JLabel into Panel panel:
+        panel.add(passwordLabel);
+
+        /*----JPasswordField For Password----*/
+        passwordPField = new JPasswordField(15);
+        passwordPField.setBounds(260, 130, 150, 20);
+        passwordPField.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // added Password JPasswordField into Panel panel:
+        panel.add(passwordPField);
+
+        //============================================================================================================//
+
+        /*----JLabel For Create Account As----*/
+        JLabel createAccountLabel = new JLabel("Create Account As");
+        // set properties for Create Account As JLabel:
+        createAccountLabel.setForeground(Color.DARK_GRAY);
+        createAccountLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        createAccountLabel.setBounds(100, 170, 140, 20);
+        // added Create Account As JLabel into Panel panel:
+        panel.add(createAccountLabel);
+
+        /*-----Choice For Create Account As----*/
+        createAccountChoice = new Choice();
+        createAccountChoice.add("Admin"); // added Admin to choice:
+        createAccountChoice.add("Customer"); // added Customer to choice:
+        createAccountChoice.setBounds(260, 170, 150, 20);
+        createAccountChoice.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // added Create Account As Choice into Panel:
+        panel.add(createAccountChoice);
 
 
-        JLabel l4 = new JLabel("Create Account As");
-        l4.setForeground(Color.DARK_GRAY);
-        l4.setFont(new Font("Tahoma", Font.BOLD, 14));
-        l4.setBounds(100, 170, 140, 20);
-        p1.add(l4);
+        //============================================================================================================//
 
 
-        JLabel l5 = new JLabel("Meter Number");
-        l5.setForeground(Color.DARK_GRAY);
-        l5.setFont(new Font("Tahoma", Font.BOLD, 14));
-        l5.setBounds(100, 210, 100, 20);
-        l5.setVisible(false);
-        p1.add(l5);
+        /*----JLabel For Meter Number----*/
+        JLabel meterNumberLabel = new JLabel("Meter Number");
+        // set properties for Meter Number As JLabel:
+        meterNumberLabel.setForeground(Color.DARK_GRAY);
+        meterNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        meterNumberLabel.setBounds(100, 210, 100, 20);
+        meterNumberLabel.setVisible(false);
+        // added Meter Number JLabel into Panel panel:
+        panel.add(meterNumberLabel);
 
-        t4 = new JTextField();
-        t4.setBounds(260, 210, 150, 20);
-        t4.setVisible(false);
-        p1.add(t4);
+        /*----Text Field For Meter Number----*/
+        meterNumberTextField = new JTextField();
+        // set properties for Meter Number As Text Field:
+        meterNumberTextField.setBounds(260, 210, 150, 20);
+        meterNumberTextField.setFont(new Font("Tahoma", Font.BOLD, 14));
+        meterNumberTextField.setVisible(false);
+        // added Meter Number Text Field into Panel panel:
+        panel.add(meterNumberTextField);
 
 
-        c1 = new Choice();
-        c1.add("Admin");
-        c1.add("Customer");
-        c1.setBounds(260, 170, 150, 20);
-        p1.add(c1);
+        //============================================================================================================//
 
-
-        c1.addItemListener(new ItemListener() {
+        createAccountChoice.addItemListener(new ItemListener() {
             @Override
-            public void itemStateChanged(ItemEvent ae) {
-                String user = c1.getSelectedItem();
+            public void itemStateChanged (ItemEvent ae) {
+                // If selectedItem is Customer: then Meter Number Field is Visible:
+                String user = createAccountChoice.getSelectedItem();
                 if (user.equals("Customer")) {
-                    l5.setVisible(true);
-                    t4.setVisible(true);
-                }else{
-                    l5.setVisible(false);
-                    t4.setVisible(false);
+                    meterNumberLabel.setVisible(true);
+                    meterNumberTextField.setVisible(true);
+                    // If selectedItem is Admin: then Meter Number Field is hidden:
+                } else {
+                    meterNumberLabel.setVisible(false);
+                    meterNumberTextField.setVisible(false);
                 }
             }
         });
 
 
-        b1 = new JButton("Create");
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
-        b1.setBounds(140, 290, 120, 30);
-        b1.addActionListener(this);
-        p1.add(b1);
-
-        b2 = new JButton("Back");
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
-        b2.setBounds(300, 290, 120, 30);
-        b2.addActionListener(this);
-        p1.add(b2);
-
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/signupImage.png"));
-        Image i2 = i1.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT);
-        ImageIcon i3 = new ImageIcon(i2);
-        JLabel l6 = new JLabel(i3);
-        l6.setBounds(450, 30, 250, 250);
-        p1.add(l6);
+        //============================================================================================================//
 
 
+
+        /*----Create Create Button----*/
+        ImageIcon iIcon = new ImageIcon(ClassLoader.getSystemResource("icon/icon12.png"));
+        Image createImage = iIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        createButton = new JButton("Create", new ImageIcon(createImage));
+        // set properties of Create Button:
+        createButton.setBackground(Color.WHITE);
+        createButton.setForeground(Color.BLACK);
+        createButton.setBounds(140, 290, 120, 30);
+        createButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // addActionListener when click on this button then they trigger the action listener:
+        createButton.addActionListener(this);
+        // added Create Button to Panel panel:
+        panel.add(createButton);
+
+        /*----Create Back Button----*/
+        ImageIcon backIcon = new ImageIcon(ClassLoader.getSystemResource("icon/back3.png"));
+        Image backImage = backIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+
+        backButton = new JButton("Back", new ImageIcon(backImage));
+        // set properties of Back Button:
+        backButton.setBackground(Color.WHITE);
+        backButton.setForeground(Color.BLACK);
+        backButton.setBounds(300, 290, 120, 30);
+        backButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // addActionListener when click on this button then they trigger the action listener:
+        backButton.addActionListener(this);
+        // added Back Button to Panel panel:
+        panel.add(backButton);
+
+
+        //============================================================================================================//
+
+        // ImageIcon For Signup:
+        ImageIcon signupIcon = new ImageIcon(ClassLoader.getSystemResource("icon/signupImage.png"));
+        // Scale the Image:
+        Image signupImage = signupIcon.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT);
+        ImageIcon convertSignupIcon = new ImageIcon(signupImage);
+        JLabel signupImg = new JLabel(convertSignupIcon);
+        signupImg.setBounds(450, 30, 250, 250);
+        // added signupImage into Panel:
+        panel.add(signupImg);
+
+
+    }
+
+    public static void main (String[] args) {
+        LOGGER.info("==: Signup:: Inside main method:==");
+        new Signup().setVisible(true);
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == b1) {
-            String username = t1.getText();
-            String name = t2.getText();
-            String password = t3.getText();
-            String user = c1.getSelectedItem();
-            String meter = t4.getText();
+    public void actionPerformed (ActionEvent ae) {
+
+        LOGGER.info("==: Signup:: Inside actionPerformed method:==");
+        // If click on Create Button:
+        if (ae.getSource() == createButton) {
+
+            // Fetch userName from userNameTextField:
+            String username = userNameTextField.getText();
+            LOGGER.info("userName: " + username);
+
+            // Fetch name from nameTextField:
+            String name = nameTextField.getText();
+            LOGGER.info("name: " + name);
+
+            // Fetch password from passwordPField:
+            String password = passwordPField.getText();
+            LOGGER.info("password: " + password);
+
+            // Fetch user from createAccountChoice:
+            String user = createAccountChoice.getSelectedItem();
+            LOGGER.info("user: " + user);
+
+            // Fetch meter from meterNumberTextField:
+            String meter = meterNumberTextField.getText();
+            LOGGER.info("meter: " + meter);
 
             try {
+
+                // Get connection with database:
                 Connection c = ConnectionProvider.getConnection();
-                String str = null;
 
-                if(user.equals("Admin")){
+                String query = null;
 
-                    str = "insert into login values('"+meter+"', '"+username+"', '"+name+"', '"+password+"', '"+user+"')";
+                // If user.equals("Admin")
+                if (user.equals("Admin")) {
 
-                }else{
+                    // If user is Admin, then all the information inserted into login table:
+                    query = "insert into login values('" + meter + "', '" + username + "', '" + name + "', '" + password + "', '" + user + "')";
 
-                    str = "update login set username = '"+username+"', name = '"+name+"', password = '"+password+"', user = '"+user+"' where meter_no = '"+t4.getText()+"'";
+                } else {
+
+                    // If user is customer, then all the information updated into login table on the condition of
+                    // meter number:
+                    query = "update login set username = '" + username + "', name = '" + name + "', password = '" + password + "', user = '" + user + "' where meter_no = '" + meterNumberTextField.getText() + "'";
 
                 }
 
+                LOGGER.info("query: " + query);
+
                 Statement s = c.createStatement();
-                s.executeUpdate(str);
+                s.executeUpdate(query);
 
+                // After successfully execute the query, then simply one pop-up message i.e "Account Created
+                // Successfully"
                 JOptionPane.showMessageDialog(null, "Account Created Successfully");
-                this.setVisible(false);
-                new Login().setVisible(true);
-            }catch(Exception e){
 
+                // then current frame is closed:
+                this.setVisible(false);
+
+                // login frame is open:
+                new Login().setVisible(true);
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                LOGGER.info("----Signup:: Get Exception Create Button action listener----" + errors);
             }
-        } else if (ae.getSource() == b2) {
+            // If Click on Back Button:
+        } else if (ae.getSource() == backButton) {
+
+            // then simply closed the current frame:
             this.setVisible(false);
+
+            // then again open the login frame:
             new Login().setVisible(true);
         }
-    }
-
-
-    public static void main(String[] args){
-        new Signup().setVisible(true);
     }
 }
