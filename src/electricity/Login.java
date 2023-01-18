@@ -103,6 +103,7 @@ public class Login extends JFrame implements ActionListener {
         // set the properties of Drop-Down:
         loginAsChoice.setBounds(400, 100, 150, 20);
         loginAsChoice.setFont(new Font("Tahoma", Font.BOLD, 14));
+        loginAsChoice.setForeground(new Color(0, 102, 102));
         // Logging in as Drop-Down added into frame:
         add(loginAsChoice);
 
@@ -134,8 +135,8 @@ public class Login extends JFrame implements ActionListener {
 
 
         /*------Signup Button------*/
-        ImageIcon sigupIcon = new ImageIcon(ClassLoader.getSystemResource("icon/signup.png"));
-        Image signupImage = sigupIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        ImageIcon signupIcon = new ImageIcon(ClassLoader.getSystemResource("icon/signup.png"));
+        Image signupImage = signupIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
         signupButton = new JButton("Signup", new ImageIcon(signupImage));
         signupButton.setBounds(380, 200, 130, 20);
         // Signup Button added into frame:
@@ -213,9 +214,10 @@ public class Login extends JFrame implements ActionListener {
 
                 Statement s = c.createStatement();
 
-                // Fetch the resultset from login table where username = ? password = ? user = ?
+                // Fetch the resultSet from login table where username = ? password = ? user = ?
                 ResultSet rs = s.executeQuery(query);
 
+                // If data records is present then go inside if condition:
                 if (rs.next()) {
 
                     // Fetch the meter_no from resultSet:
@@ -226,11 +228,14 @@ public class Login extends JFrame implements ActionListener {
                     // Now close the window:
                     this.setVisible(false);
 
+
+                    // If data records is not present then go inside else condition:
                 } else {
 
-                    // If the resultset is null then one pop-up message show i.e Invalid login:
-                    JOptionPane.showMessageDialog(null, "Invalid login");
+                    // If the resultSet is null then one pop-up message show i.e Invalid login:
+                    JOptionPane.showMessageDialog(null, "Invalid Login");
 
+                    // In case of Invalid Login userName and password field set to be "empty":
                     // After showing message i.e Invalid login: set the username = "" and password="" i.e(empty):
                     userNameTextField.setText("");
                     passwordPField.setText("");

@@ -1,4 +1,3 @@
-
 package electricity;
 
 import javax.swing.*;
@@ -8,234 +7,345 @@ import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
-public class MeterInfo extends JFrame implements ActionListener{
+public class MeterInfo extends JFrame implements ActionListener {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(MeterInfo.class));
 
-    JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9, l10, l11;
+    JLabel lMeterNo, lMeterLocation, lMeterType, lBillType, lPhaseCode, lDays, lNote, l8, lDaysValue, lNoteValue, lMeterValue;
 
-    Choice c1, c2, c3,c4, c5;
+    Choice cMeterLocation, cMeterType, cPhaseCode, cBillType;
 
-    JButton b1,b2;
+    JButton submitButton, cancelButton;
 
-    MeterInfo(String meter){
+    MeterInfo (String meter) {
+
+        //============================================================================================================//
 
         LOGGER.info("==: MeterInfo:: Inside MeterInfo Constructor :==");
 
+        //============================================================================================================//
+
+        /*----create frame----*/
         // set the location and size:
-        setLocation(600,200);
-        setSize(700,500);
+        setLocation(600, 200);
+        setSize(700, 500);
 
-        // Create a panel:
-        JPanel p = new JPanel();
-        p.setLayout(null);
-        p.setBackground(new Color(173,216,230));
+        //============================================================================================================//
 
-        // Title of the panel:
+        /*----Create a panel:----*/
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBackground(new Color(173, 216, 230));
+
+        //============================================================================================================//
+
+        /*----Title of the panel:----*/
         JLabel title = new JLabel("Meter Information");
-        title.setBounds(180, 10, 200, 26);
-        title.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        p.add(title);
+        title.setBounds(160, 10, 250, 26);
+        title.setFont(new Font("Tahoma", Font.BOLD, 24));
+        panel.add(title);
 
-        // Label Meter Number:
-        l1 = new JLabel("Meter Number");
-        l1.setBounds(100, 80, 100, 20);
+        //============================================================================================================//
 
-        // Label Meter Number value:
-        l11 = new JLabel(meter);
-        l11.setBounds(240, 80, 200, 20);
+        /*----Label Meter Number:-----*/
+        lMeterNo = new JLabel("Meter Number");
+        lMeterNo.setBounds(100, 80, 100, 20);
+        lMeterNo.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-        // adding label l1, l11 into panel:
-        p.add(l1);
-        p.add(l11);
+        /*----Label Meter Number value:----*/
+        lMeterValue = new JLabel(meter);
+        lMeterValue.setBounds(240, 80, 200, 20);
+        lMeterValue.setFont(new Font("Tahoma", Font.BOLD, 12));
 
+        /*----adding label lMeterNo, lMeterValue into panel:----*/
+        panel.add(lMeterNo);
+        panel.add(lMeterValue);
 
-        // Label Meter Location:
-        l2 = new JLabel("Meter Location");
-        l2.setBounds(100, 120, 100, 20);
+        //============================================================================================================//
 
-        // Choice Meter Location:
-        c1 = new Choice();
-        c1.add("Outside");
-        c1.add("Inside");
-        c1.setBounds(240, 120, 200, 20);
+        /*----Label Meter Location:----*/
+        lMeterLocation = new JLabel("Meter Location");
+        lMeterLocation.setBounds(100, 120, 100, 20);
+        lMeterLocation.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-        // adding label and choice to panel:
-        p.add(l2);
-        p.add(c1);
+        /*----Choice Meter Location:----*/
+        cMeterLocation = new Choice();
+        cMeterLocation.add("Outside");
+        cMeterLocation.add("Inside");
+        cMeterLocation.setBounds(240, 120, 200, 20);
+        cMeterLocation.setFont(new Font("Tahoma", Font.BOLD, 12));
+        cMeterLocation.setForeground(new Color(0, 102, 102));
 
-        // Label Meter Type:
-        l3 = new JLabel("Meter Type");
-        l3.setBounds(100, 160, 100, 20);
+        /*----adding label and choice to panel:----*/
+        panel.add(lMeterLocation);
+        panel.add(cMeterLocation);
 
-        // Choice Meter Type:
-        c2 = new Choice();
-        c2.add("Electric Meter");
-        c2.add("Solar Meter");
-        c2.add("Smart Meter");
-        c2.setBounds(240, 160, 200, 20);
+        //============================================================================================================//
 
-        // adding both label and choice to panel:
-        p.add(l3);
-        p.add(c2);
+        /*----Label Meter Type:----*/
+        lMeterType = new JLabel("Meter Type");
+        lMeterType.setBounds(100, 160, 100, 20);
+        lMeterType.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-        // Label Phase Code:
-        l5 = new JLabel("Phase Code");
-        l5.setBounds(100, 200, 100, 20);
-
-        // Choice Phase Code:
-        c3 = new Choice();
-        c3.add("011");
-        c3.add("022");
-        c3.add("033");
-        c3.add("044");
-        c3.add("055");
-        c3.add("066");
-        c3.add("077");
-        c3.add("088");
-        c3.add("099");
-        c3.setBounds(240, 200, 200, 20);
-
-        // adding both label and choice to panel:
-        p.add(l5);
-        p.add(c3);
+        /*----Choice Meter Type:----*/
+        cMeterType = new Choice();
+        cMeterType.add("Electric Meter");
+        cMeterType.add("Solar Meter");
+        cMeterType.add("Smart Meter");
+        cMeterType.setForeground(new Color(0, 102, 102));
+        cMeterType.setBounds(240, 160, 200, 20);
+        cMeterType.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 
-        // Label Bill Type:
-        l4 = new JLabel("Bill Type");
-        l4.setBounds(100, 240, 100, 20);
+        /*----adding both label and choice to panel:----*/
+        panel.add(lMeterType);
+        panel.add(cMeterType);
 
-        // Choice Bill Type:
-        c4 = new Choice();
-        c4.add("Normal");
-        c4.add("Industrial");
-        c4.setBounds(240, 240, 200, 20);
+        //============================================================================================================//
 
-        // adding both label and choice to pannel:
-        p.add(l4);
-        p.add(c4);
+        /*----Label Phase Code:----*/
+        lPhaseCode = new JLabel("Phase Code");
+        lPhaseCode.setBounds(100, 200, 100, 20);
+        lPhaseCode.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-        // Label Days:
-        l6 = new JLabel("Days");
-        l6.setBounds(100, 280, 100, 20);
+        /*----Choice Phase Code:-----*/
+        cPhaseCode = new Choice();
+        cPhaseCode.add("011");
+        cPhaseCode.add("022");
+        cPhaseCode.add("033");
+        cPhaseCode.add("044");
+        cPhaseCode.add("055");
+        cPhaseCode.add("066");
+        cPhaseCode.add("077");
+        cPhaseCode.add("088");
+        cPhaseCode.add("099");
+        cPhaseCode.setBounds(240, 200, 200, 20);
+        cPhaseCode.setFont(new Font("Tahoma", Font.BOLD, 12));
+        cPhaseCode.setForeground(new Color(0, 102, 102));
 
-        // Label Days value default set to "30 days"
-        l9 = new JLabel("30 Days");
-        l9.setBounds(240, 280, 200, 20);
-
-        // adding both label to panel:
-        p.add(l6);
-        p.add(l9);
-
-        // Label Note:
-        l7 = new JLabel("Note");
-        l7.setBounds(100, 320, 100, 20);
-
-        // Label Note value by default set to be "By Default Bill is calculated for 30 days only":
-        l10 = new JLabel("By Default Bill is calculated for 30 days only");
-        l10.setBounds(240, 320, 300, 20);
-
-        // adding both label to panel:
-        p.add(l7);
-        p.add(l10);
+        /*----adding both label and choice to panel:----*/
+        panel.add(lPhaseCode);
+        panel.add(cPhaseCode);
 
 
-        // Creating Submit and Cancel Button and set background and foreground color to it:
-        b1 = new JButton("Submit");
-        b1.setBounds(120, 390, 100, 25);
+        //============================================================================================================//
 
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
 
-        b2 = new JButton("Cancel");
-        b2.setBounds(250, 390, 100, 25);
+        /*----Label Bill Type:----*/
+        lBillType = new JLabel("Bill Type");
+        lBillType.setBounds(100, 240, 100, 20);
+        lBillType.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
+        /*----Choice Bill Type:----*/
+        cBillType = new Choice();
+        cBillType.add("Normal");
+        cBillType.add("Industrial");
+        cBillType.setBounds(240, 240, 200, 20);
+        cBillType.setFont(new Font("Tahoma", Font.BOLD, 12));
+        cBillType.setForeground(new Color(0, 102, 102));
 
-        // adding submit and cancel button to panel:
-        p.add(b1);
-        p.add(b2);
+        /*----adding both label and choice to panel:----*/
+        panel.add(lBillType);
+        panel.add(cBillType);
+
+
+        //============================================================================================================//
+
+        /*----Label Days:----*/
+        lDays = new JLabel("Days");
+        lDays.setBounds(100, 280, 100, 20);
+        lDays.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        /*----Label Days value default set to "30 days"----*/
+        lDaysValue = new JLabel("30 Days");
+        lDaysValue.setBounds(240, 280, 200, 20);
+        lDaysValue.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        /*----adding both label to panel:----*/
+        panel.add(lDays);
+        panel.add(lDaysValue);
+
+        //============================================================================================================//
+
+        /*----Label Note:----*/
+        lNote = new JLabel("Note");
+        lNote.setBounds(100, 320, 100, 20);
+        lNote.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        /*----Label Note value by default set to be "By Default Bill is calculated for 30 days only":----*/
+        lNoteValue = new JLabel("By Default Bill is calculated for 30 days only");
+        lNoteValue.setBounds(240, 320, 300, 20);
+        lNoteValue.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        /*----adding both label to panel:----*/
+        panel.add(lNote);
+        panel.add(lNoteValue);
+
+        //============================================================================================================//
+
+
+        /*----Creating Submit and set background and foreground color to it:----*/
+        ImageIcon submitIcon = new ImageIcon(ClassLoader.getSystemResource("icon/save.png"));
+        Image submitImage = submitIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        submitButton = new JButton("Submit", new ImageIcon(submitImage));
+        submitButton.setBounds(120, 390, 100, 25);
+        submitButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        submitButton.setBackground(Color.WHITE);
+        submitButton.setForeground(Color.BLACK);
+
+
+        ImageIcon cancelIcon = new ImageIcon(ClassLoader.getSystemResource("icon/cancel.jpg"));
+        Image cancelImage = cancelIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        cancelButton = new JButton("Cancel", new ImageIcon(cancelImage));
+        cancelButton.setBounds(250, 390, 100, 25);
+        cancelButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        cancelButton.setBackground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK);
+
+        /*----adding submit and cancel button to panel:----*/
+        panel.add(submitButton);
+        panel.add(cancelButton);
+
+        /*----adding action listener to both submit anc cancel button:----*/
+        submitButton.addActionListener(this);
+        cancelButton.addActionListener(this);
+
+
+        //============================================================================================================//
 
         setLayout(new BorderLayout());
 
-        // set panel to center:
-        add(p,"Center");
+        /*----set panel to center:----*/
+        add(panel, "Center");
 
-        // Label Image Icon on west side:
+        //============================================================================================================//
+
+        /*-----Label Image Icon on west side:----*/
         ImageIcon ic1 = new ImageIcon(ClassLoader.getSystemResource("icon/hicon1.jpg"));
-        Image i3 = ic1.getImage().getScaledInstance(150, 300,Image.SCALE_DEFAULT);
+        Image i3 = ic1.getImage().getScaledInstance(150, 300, Image.SCALE_DEFAULT);
         ImageIcon ic2 = new ImageIcon(i3);
         l8 = new JLabel(ic2);
-        
-        
-        add(l8,"West");
-        //for changing the color of the whole Frame
+        add(l8, "West");
+        /*----for changing the color of the whole Frame----*/
         getContentPane().setBackground(Color.WHITE);
 
-        // adding action listener to both submit anc cancel button:
-        b1.addActionListener(this);
-        b2.addActionListener(this);
+
+    }
+
+    public static void main (String[] args) {
+        LOGGER.info("==: MeterInfo:: Inside Main Method :==");
+        new MeterInfo("").setVisible(true);
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed (ActionEvent ae) {
 
         LOGGER.info("==: MeterInfo:: Inside actionPerformed Method:==");
 
+        // Connection With database:
+        Connection c = ConnectionProvider.getConnection();
+
+
+        // Fetch meterNumber from lMeterValue:
+        String meterNumber = lMeterValue.getText();
+        LOGGER.info("meterNumber: " + meterNumber);
+
+        // Fetch meterLocation from cMeterLocation:
+        String meterLocation = cMeterLocation.getSelectedItem();
+        LOGGER.info("meterLocation: " + meterLocation);
+
+        // Fetch meterType from cMeterType:
+        String meterType = cMeterType.getSelectedItem();
+        LOGGER.info("meterType: " + meterType);
+
+        // Fetch phaseCode from cPhaseCode:
+        String phaseCode = cPhaseCode.getSelectedItem();
+        LOGGER.info("phaseCode: " + phaseCode);
+
+        // Fetch billType from cBillType:
+        String billType = cBillType.getSelectedItem();
+        LOGGER.info("billType" + billType);
+
+        // Fixed value of days = 30"
+        String days = "30";
+        LOGGER.info("days: " + days);
+
         // If click on submit button:
-        if(ae.getSource() == b1){
+        if (ae.getSource() == submitButton) {
 
-            // Fetch the all the value related to textfield and putting into q1:
-            String meter_number = l11.getText();
-            String meter_location = c1.getSelectedItem();
-            String meter_type = c2.getSelectedItem();
-            String phase_code = c3.getSelectedItem();
-            String bill_type = c4.getSelectedItem();
-            String days = "30";
+            try {
 
-            String q1 = "insert into meter_info values('"+meter_number+"','"+meter_location+"','"+meter_type+"','"+phase_code+"','"+bill_type+"','"+days+"')";
+                String query1 = "insert into meter_info values('" + meterNumber + "','" + meterLocation + "','" + meterType + "','" + phaseCode + "','" + billType + "','" + days + "')";
+                LOGGER.info("query1: " + query1);
 
-            try{
 
-                // Connection With database:
-                Connection c1 = ConnectionProvider.getConnection();
-                Statement s = c1.createStatement();
+                Statement s = c.createStatement();
 
                 // update the information into meter_info table:
-                s.executeUpdate(q1);
+                s.executeUpdate(query1);
 
                 // after updating the information into meter_info table then simply
                 // one pop-up message is shows "Meter Info Added Successfully":
-                JOptionPane.showMessageDialog(null,"Meter Info Added Successfully");
+                JOptionPane.showMessageDialog(null, "Meter Info Added Successfully");
 
-                // Now simply current window is close:
+                // Now simply current frame is close:
                 this.setVisible(false);
 
-            }catch(Exception ex){
+            } catch (Exception ex) {
 
-                 ex.printStackTrace();
-                 StringWriter errors = new StringWriter();
-                 ex.printStackTrace(new PrintWriter(errors));
-                 LOGGER.info("----MeterInfo:: Getting Exception actionPerformed----"+ex.toString());
+                ex.printStackTrace();
+                StringWriter errors = new StringWriter();
+                ex.printStackTrace(new PrintWriter(errors));
+                LOGGER.info("----MeterInfo:: Getting Exception actionPerformed Submit Button----" + errors);
 
             }
 
-        // If click on Button Cancel:
-        }else if(ae.getSource() == b2){
+            // If click on Button Cancel: Then simply delete the all information of customer table of specific
+            // meterNumber:
+        } else if (ae.getSource() == cancelButton) {
 
-            // Simply close the current window:
+            String query2 = "delete from customer where meter = ?";
+            LOGGER.info("query2: " + query2);
+
+            try {
+
+                PreparedStatement prest = c.prepareStatement(query2);
+                prest.setString(1, meterNumber);
+
+                int del = prest.executeUpdate();
+                LOGGER.info("Number of Record are Deleted: " + del);
+
+                // after updating the information into customer table then simply
+                // one pop-up message is shows "Customer Info Deleted Successfully":
+                JOptionPane.showMessageDialog(null, "Customer Info Deleted Successfully");
+
+                // Now simply close current frame:
+                this.setVisible(false);
+
+                // Then simply open NewCustomer frame again:
+                new NewCustomer().setVisible(true);
+
+
+            } catch (SQLException e) {
+
+                e.printStackTrace();
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                LOGGER.info("----MeterInfo:: Getting Exception actionPerformed Cancel Button----" + errors);
+
+            }
+
+
+            // Simply close the current frame:
             this.setVisible(false);
 
         }
-    }
-    
-    
-    public static void main(String[] args){
-        LOGGER.info("==: MeterInfo:: Inside Main Method :==");
-        new MeterInfo("").setVisible(true);
     }
 }

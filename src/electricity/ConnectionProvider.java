@@ -15,7 +15,7 @@ public class ConnectionProvider {
 
     private static Connection con;
 
-    private static Properties readPropertiesFile(String fileName) {
+    private static Properties readPropertiesFile (String fileName) {
 
         FileInputStream fis = null;
         Properties prop = null;
@@ -26,7 +26,7 @@ public class ConnectionProvider {
             prop = new Properties();
             prop.load(fis);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
 
             e.printStackTrace();
             StringWriter errors = new StringWriter();
@@ -54,10 +54,9 @@ public class ConnectionProvider {
     }
 
 
+    public static Connection getConnection () {
 
-    public static Connection getConnection(){
-
-        Connection con = null;
+        con = null;
         try {
 
             LOGGER.info("==: Inside getConnection Method :==");
@@ -65,10 +64,10 @@ public class ConnectionProvider {
             // Getting application.properties values:
             Properties prop = readPropertiesFile("src/application.properties");
 
-            // load driver:
+            // 1. Register the Driver class: load driver:
             Class.forName(prop.getProperty("database.className"));
 
-            // create connection:
+            // 2. create connection:
             con = DriverManager.getConnection(prop.getProperty("database.url"), prop.getProperty(
                     "database.username"), prop.getProperty("database.password"));
 
@@ -86,7 +85,7 @@ public class ConnectionProvider {
         return con;
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         Connection connection = ConnectionProvider.getConnection();
     }
 }

@@ -5,8 +5,6 @@ T
 $src/electricity/ViewInformation.java,8\e\8ea3687cb8232472607e9357d2aed7bd182f4b34
 P
  src/electricity/BillDetails.java,0\c\0cd2c39f09d4653f403c81580bb60cdca121f9a6
-J
-src/electricity/About.java,f\6\f615d767b78aa6af65e8846d57d4e5f122909db8
 R
 "src/electricity/CalculateBill.java,a\3\a3c0319e389ccd483d507779921637c159f602fe
 T
