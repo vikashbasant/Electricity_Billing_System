@@ -4,13 +4,11 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
@@ -143,12 +141,59 @@ public class Signup extends JFrame implements ActionListener {
 
         /*----Text Field For Meter Number----*/
         meterNumberTextField = new JTextField();
-        // set properties for Meter Number As Text Field:
+        // set properties for Meter Number Than Text Field:
         meterNumberTextField.setBounds(260, 210, 150, 20);
         meterNumberTextField.setFont(new Font("Tahoma", Font.BOLD, 14));
         meterNumberTextField.setVisible(false);
         // added Meter Number Text Field into Panel panel:
         panel.add(meterNumberTextField);
+
+        //============================================================================================================//
+
+        //For Specific meter no fetch the name from login table then set into name text field after focus shifted
+        // from meter no
+        meterNumberTextField.addFocusListener(new FocusListener() {
+
+            /**
+             * Invoked when a component gains the keyboard focus.
+             *
+             * @param e
+             */
+            @Override
+            public void focusGained (FocusEvent e) {
+
+            }
+
+            /**
+             * Invoked when a component loses the keyboard focus.
+             *
+             * @param e
+             */
+            @Override
+            public void focusLost (FocusEvent e) {
+                try {
+                    /*----Connection With Database----*/
+                    Connection c = ConnectionProvider.getConnection();
+                    Statement s = c.createStatement();
+
+                    String loginQuery =
+                            "select * from login where meter_no = '" + meterNumberTextField.getText() + "'";
+                    ResultSet rs = s.executeQuery(loginQuery);
+
+                    while (rs.next()) {
+                        nameTextField.setText(rs.getString("name"));
+                    }
+
+
+                } catch (Exception ex) {
+
+                    ex.printStackTrace();
+                    StringWriter errors = new StringWriter();
+                    ex.printStackTrace(new PrintWriter(errors));
+                    LOGGER.info("----Signup:: Get Exception focusLost Method----" + errors);
+                }
+            }
+        });
 
 
         //============================================================================================================//
@@ -161,10 +206,16 @@ public class Signup extends JFrame implements ActionListener {
                 if (user.equals("Customer")) {
                     meterNumberLabel.setVisible(true);
                     meterNumberTextField.setVisible(true);
+
+                    // If user is customer then customer name fetch from login table so that nameTextField non-editable:
+                    nameTextField.setEnabled(false);
                     // If selectedItem is Admin: then Meter Number Field is hidden:
                 } else {
                     meterNumberLabel.setVisible(false);
                     meterNumberTextField.setVisible(false);
+
+                    // If user is admin then we need to give name value so that nameTextField editable:
+                    nameTextField.setEnabled(true);
                 }
             }
         });
@@ -268,7 +319,7 @@ public class Signup extends JFrame implements ActionListener {
 
                     // If user is customer, then all the information updated into login table on the condition of
                     // meter number:
-                    query = "update login set username = '" + username + "', name = '" + name + "', password = '" + password + "', user = '" + user + "' where meter_no = '" + meterNumberTextField.getText() + "'";
+                    query = "update login set username = '" + username + "', password = '" + password + "', user = '" + user + "' where meter_no = '" + meterNumberTextField.getText() + "'";
 
                 }
 
