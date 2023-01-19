@@ -1,0 +1,13 @@
+
+R
+java:S2629J"7Use the built-in formatting to construct this argument.(ƒ¶Ó˜ùÿÿÿÿ
+X
+java:S2259D"BA "NullPointerException" could be thrown; "prop" is nullable here.(Å¾şƒ
+o
+java:S1450"RRemove the "con" field and declare it as a local variable in the relevant methods.(’üÍñ8½²œÜ0
+E
+java:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+Y
+java:S1854Y">Remove this useless assignment to local variable "connection".(îìİáüÿÿÿÿ
+J
+java:S1481Y"/Remove this unused "connection" local variable.(îìİáüÿÿÿÿ

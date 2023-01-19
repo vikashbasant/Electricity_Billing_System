@@ -13,306 +13,393 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
-public class CalculateBill extends JFrame implements ActionListener{
+public class CalculateBill extends JFrame implements ActionListener {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(CalculateBill.class));
 
-    JLabel l1,l2,l3,l4,l5;
+    JLabel lCalculateBill, lMeterNo, lUnitsConsumed, lHiIcon, lMonth;
 
-    JTextField t1;
+    JTextField tUnitsConsumed;
 
-    Choice c1,c2;
+    Choice cMeterNo, cMonth;
 
-    JButton b1,b2;
+    JButton submitButton, cancelButton;
 
-    JPanel p;
+    JPanel panel;
 
-    CalculateBill(){
+    CalculateBill () {
+
+        //============================================================================================================//
 
         LOGGER.info("==: CalculateBill:: Inside CalculateBill Constructor:==");
 
-        // Create panel:
-        p = new JPanel();
-        p.setLayout(null);
-        p.setBackground(new Color(173, 216, 230));
+        //============================================================================================================//
 
-        // Label Calculate Electricity Bill:
-        l1 = new JLabel("Calculate Electricity Bill");
-        l1.setBounds(30, 10, 400, 30);
+        /*----Create panel:----*/
+        panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBackground(new Color(173, 216, 230));
 
-        // Label Meter No:
-        l2 = new JLabel("Meter No");
-        l2.setBounds(60, 70, 100, 30);
 
-        // Choice Meter No.:
-        c1 = new Choice();
-        c1.setBounds(200, 70, 180, 20);
+        //============================================================================================================//
 
-        try{
+        /*----Label Calculate Electricity Bill:----*/
+        lCalculateBill = new JLabel("Calculate Electricity Bill");
+        lCalculateBill.setBounds(30, 10, 400, 30);
+        lCalculateBill.setFont(new Font("Senserif", Font.PLAIN, 26));
+        /*----Move the label to center----*/
+        lCalculateBill.setHorizontalAlignment(JLabel.CENTER);
+
+
+        /*----Added lCalculateBill into panel----*/
+        panel.add(lCalculateBill);
+
+        //============================================================================================================//
+
+        /*----Label Meter No:----*/
+        lMeterNo = new JLabel("Meter No");
+        lMeterNo.setBounds(60, 70, 100, 30);
+        lMeterNo.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+        /*----Choice Meter No.:----*/
+        cMeterNo = new Choice();
+        cMeterNo.setBounds(200, 70, 180, 20);
+        cMeterNo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        cMeterNo.setForeground(new Color(0, 102, 102));
+
+        try {
 
             // Connection with database:
             Connection c = ConnectionProvider.getConnection();
             Statement s = c.createStatement();
+
+            String query = "select * from customer";
+            LOGGER.info("query For Meter No: " + query);
 
             // Fetch the all records from customer table:
-            ResultSet rs = s.executeQuery("select * from customer");
+            ResultSet rs = s.executeQuery(query);
 
 
-            while(rs.next()){
+            while (rs.next()) {
 
-                // Fetch the meter no adding into choice c1:
-                c1.add(rs.getString("meter"));
+                // Fetch the meter no adding into choice cMeterNo:
+                cMeterNo.add(rs.getString("meter"));
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
             StringWriter errors = new StringWriter();
             e.printStackTrace(new PrintWriter(errors));
-            LOGGER.info("----CalculateBill:: Exception CalculateBill Constructor----"+e.toString());
+            LOGGER.info("----CalculateBill:: Exception CalculateBill Constructor----" + errors);
 
         }
 
-        // Label Name:
-        JLabel l6 = new JLabel("Name");
-        l6.setBounds(60, 120, 100, 30);
 
-        // Label Address:
-        JLabel l7 = new JLabel("Address");
-        l7.setBounds(60, 170, 100, 30);
+        /*----Added lMeterNo and cMeterNo into panel:----*/
+        panel.add(lMeterNo);
+        panel.add(cMeterNo);
 
-        // Label for Name and Address:
-        JLabel l11 = new JLabel();
-        l11.setBounds(200, 120, 180, 20);
-        p.add(l11);
-        
-        JLabel l12 = new JLabel();
-        l12.setBounds(200, 170, 180, 20);
-        p.add(l12);
-        
-        try{
+        //============================================================================================================//
+
+        /*----Label Name:----*/
+        JLabel lName = new JLabel("Name");
+        lName.setBounds(60, 120, 100, 30);
+        lName.setFont(new Font("Tahoma", Font.BOLD, 14));
+        /*----Added lName into panel----*/
+        panel.add(lName);
+
+        /*----Label Address:----*/
+        JLabel lAddress = new JLabel("Address");
+        lAddress.setBounds(60, 170, 100, 30);
+        lAddress.setFont(new Font("Tahoma", Font.BOLD, 14));
+        /*----Added lAddress into panel----*/
+        panel.add(lAddress);
+
+        /*----Label Value for Name and Address:----*/
+        JLabel lNameValue = new JLabel();
+        lNameValue.setBounds(200, 120, 180, 20);
+        lNameValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        /*----Added lNameValue into panel----*/
+        panel.add(lNameValue);
+
+        JLabel lAddressValue = new JLabel();
+        lAddressValue.setBounds(200, 170, 180, 20);
+        lAddressValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        /*----Added lAddressValue into panel----*/
+        panel.add(lAddressValue);
+
+        try {
 
             // Connection with database:
             Connection c = ConnectionProvider.getConnection();
             Statement s = c.createStatement();
 
+            String customerQuery = "select * from customer where meter = '" + cMeterNo.getSelectedItem() + "'";
+            LOGGER.info("customerQuery: " + customerQuery);
+
             // Fetch the records from customer table where meter no:
-            ResultSet rs = s.executeQuery("select * from customer where meter = '"+c1.getSelectedItem()+"'");
+            ResultSet rs = s.executeQuery(customerQuery);
 
-            while(rs.next()){
+            while (rs.next()) {
 
-                // Fetch the name and address from records and adding l11 and l12 label:
-                l11.setText(rs.getString("name"));
-                l12.setText(rs.getString("address"));
+                // Fetch the name and address from records and adding lNameValue and lAddressValue label:
+                lNameValue.setText(rs.getString("name"));
+                lAddressValue.setText(rs.getString("address"));
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
             StringWriter errors = new StringWriter();
             e.printStackTrace(new PrintWriter(errors));
-            LOGGER.info("----CalculateBill:: Exception CalculateBill Constructor----"+e.toString());
+            LOGGER.info("----CalculateBill:: Exception CalculateBill Constructor----" + errors);
 
         }
-        
-        c1.addItemListener(new ItemListener(){
-            public void itemStateChanged(ItemEvent ae){
 
-                try{
+        //============================================================================================================//
+
+        /*----On the change of meter no in choice. specific name and address are show----*/
+        cMeterNo.addItemListener(new ItemListener() {
+            public void itemStateChanged (ItemEvent ae) {
+
+                try {
 
                     // Connection with database:
                     Connection c = ConnectionProvider.getConnection();
                     Statement s = c.createStatement();
 
-                    // Fetch the records from customer table where meter no:
-                    ResultSet rs = s.executeQuery("select * from customer where meter = '"+c1.getSelectedItem()+"'");
+                    String customerQuery = "select * from customer where meter = '" + cMeterNo.getSelectedItem() + "'";
+                    LOGGER.info("customerQuery: " + customerQuery);
 
-                    while(rs.next()){
+
+                    // Fetch the records from customer table where meter no:
+                    ResultSet rs = s.executeQuery(customerQuery);
+
+                    while (rs.next()) {
 
                         // Fetch the name and address from records and adding l11 and l12 label:
-                        l11.setText(rs.getString("name"));
-                        l12.setText(rs.getString("address"));
+                        lNameValue.setText(rs.getString("name"));
+                        lAddressValue.setText(rs.getString("address"));
 
                     }
 
-                }catch(Exception e){
+                } catch (Exception e) {
 
                     e.printStackTrace();
                     StringWriter errors = new StringWriter();
                     e.printStackTrace(new PrintWriter(errors));
-                    LOGGER.info("----CalculateBill:: Exception CalculateBill Constructor----"+e.toString());
+                    LOGGER.info("----CalculateBill:: Exception CalculateBill Constructor----" + errors);
 
                 }
 
             }
         });
 
-        // Label Units Consumed:
-        l3 = new JLabel("Units Consumed");
-        l3.setBounds(60, 220, 100, 30);
+        //============================================================================================================//
 
-        // TextField Units Consumed:
-        t1 = new JTextField();
-        t1.setBounds(200, 220, 180, 20);
+        /*----Label Units Consumed:----*/
+        lUnitsConsumed = new JLabel("Units Consumed");
+        lUnitsConsumed.setBounds(60, 220, 130, 30);
+        lUnitsConsumed.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+        /*----TextField Units Consumed:----*/
+        tUnitsConsumed = new JTextField();
+        tUnitsConsumed.setBounds(200, 220, 180, 20);
+        tUnitsConsumed.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+        /*----Added lUnitsConsumed and tUnitsConsumed into panel:----*/
+        panel.add(lUnitsConsumed);
+        panel.add(tUnitsConsumed);
 
 
-        // Label Month:
-        l5 = new JLabel("Month");
-        l5.setBounds(60, 270, 100, 30);
-        
-        // Choice Month:
-        c2 = new Choice();
-        c2.setBounds(200, 270, 180, 20);
-        c2.add("January");
-        c2.add("February");
-        c2.add("March");
-        c2.add("April");
-        c2.add("May");
-        c2.add("June");
-        c2.add("July");
-        c2.add("August");
-        c2.add("September");
-        c2.add("October");
-        c2.add("November");
-        c2.add("December");
+        //============================================================================================================//
 
-        // Create Submit and Cancel Button and also set background and foreground color to it:
-        b1 = new JButton("Submit");
-        b1.setBounds(100, 350, 100, 25);
 
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
+        /*----Label Month:----*/
+        lMonth = new JLabel("Month");
+        lMonth.setBounds(60, 270, 100, 30);
+        lMonth.setFont(new Font("Tahoma", Font.BOLD, 14));
 
-        b2 = new JButton("Cancel");
-        b2.setBounds(230, 350, 100, 25);
+        /*----Choice Month:----*/
+        cMonth = new Choice();
+        cMonth.setBounds(200, 270, 180, 20);
+        cMonth.setFont(new Font("Tahoma", Font.BOLD, 14));
+        cMonth.setForeground(new Color(0, 102, 102));
+        cMonth.add("January");
+        cMonth.add("February");
+        cMonth.add("March");
+        cMonth.add("April");
+        cMonth.add("May");
+        cMonth.add("June");
+        cMonth.add("July");
+        cMonth.add("August");
+        cMonth.add("September");
+        cMonth.add("October");
+        cMonth.add("November");
+        cMonth.add("December");
 
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
+        /*----Added lMonth and cMonth into panel:----*/
+        panel.add(lMonth);
+        panel.add(cMonth);
+
+
+        //============================================================================================================//
+
+        /*----Create Submit and Cancel Button and also set background and foreground color to it:----*/
+        ImageIcon iSave = new ImageIcon(ClassLoader.getSystemResource("icon/save.png"));
+        Image imgSave = iSave.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        submitButton = new JButton("Submit", new ImageIcon(imgSave));
+        submitButton.setBounds(100, 350, 100, 25);
+        submitButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+
+        submitButton.setBackground(Color.WHITE);
+        submitButton.setForeground(Color.BLACK);
+
+
+        ImageIcon iCancel = new ImageIcon(ClassLoader.getSystemResource("icon/cancel.jpg"));
+        Image imgCancel = iCancel.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        cancelButton = new JButton("Cancel", new ImageIcon(imgCancel));
+        cancelButton.setBounds(230, 350, 100, 25);
+        cancelButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+
+        cancelButton.setBackground(Color.WHITE);
+        cancelButton.setForeground(Color.BLACK);
+
+        /*----Added Both Submit and Cancel Button into panel:----*/
+        panel.add(submitButton);
+        panel.add(cancelButton);
+
+        /*----adding action listener to Submit and cancel button:----*/
+        submitButton.addActionListener(this);
+        cancelButton.addActionListener(this);
+
+        //============================================================================================================//
+
 
         // Label ImageIcon
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/hicon2.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(180, 270,Image.SCALE_DEFAULT);
-        ImageIcon i3 = new ImageIcon(i2);
-        l4 = new JLabel(i3);
-        
-        
-        
-        l1.setFont(new Font("Senserif",Font.PLAIN,26));
-        //Move the label to center
-        l1.setHorizontalAlignment(JLabel.CENTER);
-        
-        // adding all the label to panel:
-        p.add(l1);
-        p.add(l2);
-        p.add(l6);
-        p.add(l7);
-        p.add(c1);
-        p.add(l5);
-        p.add(c2);
-        p.add(l3);
-        p.add(t1);
-        p.add(b1);
-        p.add(b2);
-        
-        setLayout(new BorderLayout(30,30));
-        
-        
-        add(p,"Center");
-        add(l4,"West");
-        
-        // adding action listener to Submit and cancel button:
-        b1.addActionListener(this);
-        b2.addActionListener(this);
-        
-        getContentPane().setBackground(Color.WHITE);        
-        setSize(750,500);
-        setLocation(550,220);
+        ImageIcon iHicon = new ImageIcon(ClassLoader.getSystemResource("icon/hicon2.jpg"));
+        Image imgHicon = iHicon.getImage().getScaledInstance(180, 270, Image.SCALE_DEFAULT);
+        lHiIcon = new JLabel(new ImageIcon(imgHicon));
+
+        //============================================================================================================//
+
+        setLayout(new BorderLayout(30, 30));
+        /*----Added panel and lJiIcon into frame:----*/
+        add(panel, "Center");
+        add(lHiIcon, "West");
+
+        //============================================================================================================//
+
+        /*----Create frame with properties----:*/
+
+        getContentPane().setBackground(Color.WHITE);
+        setSize(750, 500);
+        setLocation(550, 220);
 
     }
 
+    public static void main (String[] args) {
+        LOGGER.info("==: CalculateBill:: Inside main Method:==");
+        new CalculateBill().setVisible(true);
+    }
+
     @Override
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed (ActionEvent ae) {
 
         LOGGER.info("==:CalculateBill:: Inside actionPerformed Method:==");
 
         // If click on Submit button:
-        if(ae.getSource() == b1){
+        if (ae.getSource() == submitButton) {
 
-            // Fetch the meter_no, units, month:
-            String meter_no = c1.getSelectedItem();
-            String units = t1.getText();
-            String month = c2.getSelectedItem();
+            // Fetch meterNo from cMeterNo:
+            String meterNo = cMeterNo.getSelectedItem();
+            LOGGER.info("meterNo: " + meterNo);
+
+            // Fetch units from tUnitsConsumed
+            String units = tUnitsConsumed.getText();
+            LOGGER.info("units: " + units);
+
+            // Fetch units from cMonth:
+            String month = cMonth.getSelectedItem();
+            LOGGER.info("month: " + month);
 
             // String to Integer:
-            int units_consumed = Integer.parseInt(units);
+            int unitsConsumed = Integer.parseInt(units);
 
-            int total_bill = 0;
-            try{
+            int totalBill = 0;
+            try {
 
                 // Connection with database:
                 Connection c = ConnectionProvider.getConnection();
                 Statement s = c.createStatement();
 
-                // Fetch the all record from tax table:
-                ResultSet rs = s.executeQuery("select * from tax");
+                String taxQuery = "select * from tax";
+                LOGGER.info("taxQuery: " + taxQuery);
 
-                while(rs.next()){
-                    // Calculate Bill:
-                    total_bill = units_consumed * Integer.parseInt(rs.getString("cost_per_unit")); // 120 * 9
-                    total_bill += Integer.parseInt(rs.getString("meter_rent"));
-                    total_bill += Integer.parseInt(rs.getString("service_charge"));
-                    total_bill += Integer.parseInt(rs.getString("service_tax"));
-                    total_bill += Integer.parseInt(rs.getString("swachh_bharat_cess"));
-                    total_bill += Integer.parseInt(rs.getString("fixed_tax"));
+
+                // Fetch the all record from tax table:
+                ResultSet rs = s.executeQuery(taxQuery);
+
+                while (rs.next()) {
+
+                    /*---- Calculate Bill:----*/
+                    totalBill = unitsConsumed * Integer.parseInt(rs.getString("cost_per_unit")); // 120 * 9
+                    totalBill += Integer.parseInt(rs.getString("meter_rent"));
+                    totalBill += Integer.parseInt(rs.getString("service_charge"));
+                    totalBill += Integer.parseInt(rs.getString("service_tax"));
+                    totalBill += Integer.parseInt(rs.getString("swachh_bharat_cess"));
+                    totalBill += Integer.parseInt(rs.getString("fixed_tax"));
+
+                    LOGGER.info("totalBill: " + totalBill);
 
                 }
 
-            }catch(Exception e){
+            } catch (Exception e) {
+
                 e.printStackTrace();
                 StringWriter errors = new StringWriter();
                 e.printStackTrace(new PrintWriter(errors));
-                LOGGER.info("----CalculateBill::Exception actionPerformed----"+e.toString());
+                LOGGER.info("----CalculateBill::Exception actionPerformed----" + errors);
+
             }
 
             // after calculating the bill then update into bill table:
-            String q = "insert into bill values('"+meter_no+"','"+month+"','"+units+"','"+total_bill+"', 'Not Paid')";
+            String billQuery =
+                    "insert into bill values('" + meterNo + "','" + month + "','" + units + "','" + totalBill + "', 'Not Paid')";
 
-            try{
+            try {
 
                 // Connection with database:
                 Connection c = ConnectionProvider.getConnection();
                 Statement s = c.createStatement();
+
                 // Now update into bill table:
-                s.executeUpdate(q);
+                s.executeUpdate(billQuery);
 
                 // after update the bill table, pop-up message is showing "Customer Bill Updated Successfully":
-                JOptionPane.showMessageDialog(null,"Customer Bill Updated Successfully");
+                JOptionPane.showMessageDialog(null, "Customer Bill Updated Successfully");
 
-                // Then simply close the current window:
+                // Then simply close the current frame:
                 this.setVisible(false);
 
-            }catch(Exception aee){
+            } catch (Exception aee) {
 
                 aee.printStackTrace();
                 StringWriter errors = new StringWriter();
                 aee.printStackTrace(new PrintWriter(errors));
-                LOGGER.info("----CalculateBill:: Exception actionPerformed Method----" + aee.toString());
+                LOGGER.info("----CalculateBill:: Exception actionPerformed Method----" + errors);
 
             }
 
-        // If click on Cancel Button:
-        }else if(ae.getSource()== b2){
+            // If click on Cancel Button:
+        } else if (ae.getSource() == cancelButton) {
 
             // then simply close the current window:
             this.setVisible(false);
 
-        }        
-    }
-
-    public static void main(String[] args){
-        LOGGER.info("==: CalculateBill:: Inside main Method:==");
-        new CalculateBill().setVisible(true);
+        }
     }
 }

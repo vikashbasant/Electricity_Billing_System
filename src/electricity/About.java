@@ -37,7 +37,7 @@ public class About extends JFrame implements ActionListener {
 
 
         /*----Label For About Project:----*/
-        JLabel lAboutProject = new JLabel("!TEXT PROJECT!");
+        JLabel lAboutProject = new JLabel("!ABOUT PROJECT!");
         lAboutProject.setBounds(150, 10, 200, 80);
         lAboutProject.setForeground(Color.red);
         lAboutProject.setFont(new Font("Tahoma", Font.BOLD, 20));
