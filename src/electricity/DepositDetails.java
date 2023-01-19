@@ -13,181 +13,255 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
-public class DepositDetails extends JFrame implements ActionListener{
+public class DepositDetails extends JFrame implements ActionListener {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(DepositDetails.class));
 
-    JTable t1;
+    JTable billTable;
 
-    JButton b1, b2;
+    JButton searchButton, printButton, cancelButton;
 
-    JLabel l1, l2;
+    JLabel lSortByMeterNo, lSortMonth;
 
-    Choice c1, c2;
+    Choice cSortByMeterNo, cSortMonth;
 
-    String[] x = {"Meter Number","Month","Units","Total Bill","Status"};
+    String[] x = {"Meter Number", "Month", "Units", "Total Bill", "Status"};
 
-    String[][] y  = new String[40][8];
+    String[][] y = new String[40][8];
 
-    int i=0;
+    int i = 0;
 
-    int j=0;
+    int j = 0;
 
-    DepositDetails(){
+    DepositDetails () {
 
+        //============================================================================================================//
 
+        /*----Header----*/
         super("Deposit Details");
+
+        //============================================================================================================//
 
         LOGGER.info("==:DepositDetails:: Inside DepositDetails Constructor:==");
 
-        // set the size, location:
-        setSize(700,750);
-        setLocation(600,150);
+        //============================================================================================================//
+
+
+        /*----Create Frame----*/
+        setSize(700, 750);
+        setLocation(600, 150);
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
 
-        // Label Sort by Meter Number:
-        l1 = new JLabel("Sort by Meter Number");
-        l1.setBounds(20, 20, 150, 20);
-        add(l1);
+        //============================================================================================================//
 
-        // Choice Sort by Meter Number:
-        c1 = new Choice();
+        /*----Label Sort by Meter Number:----*/
+        lSortByMeterNo = new JLabel("Sort by Meter Number");
+        lSortByMeterNo.setBounds(20, 20, 150, 20);
+        lSortByMeterNo.setFont(new Font("Tahoma", Font.BOLD, 12));
+        // add lSortByMeterNo into frame:
+        add(lSortByMeterNo);
 
-        // Label Sort by Month:
-        l2 = new JLabel("Sort By Month");
-        l2.setBounds(400, 20, 100, 20);
-        add(l2);
+        /*----Choice Sort by Meter Number:----*/
+        cSortByMeterNo = new Choice();
+        cSortByMeterNo.setBounds(180, 20, 150, 20);
+        cSortByMeterNo.setForeground(new Color(0, 102, 102));
+        cSortByMeterNo.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-        // Choice Sort by Month:
-        c2 = new Choice();
-
-        // Create table:
-        t1 = new JTable(y,x);
-        
-        try{
+        try {
 
             // Connection With Database:
             Connection c = ConnectionProvider.getConnection();
             Statement s = c.createStatement();
 
-            String s1 = "select * from bill";
-
-            // Fetch the all records from bill table:
-            ResultSet rs  = s.executeQuery(s1);
-
-            // set the model to JTable t1:
-            t1.setModel(DbUtils.resultSetToTableModel(rs));
-            
-            String str2 = "select * from customer";
+            String customerQuery = "select * from customer";
+            LOGGER.info("customerQuery: " + customerQuery);
 
             // Fetch the all records from customer table:
-            rs = s.executeQuery(str2);
+            ResultSet rs = s.executeQuery(customerQuery);
 
 
-            while(rs.next()){
-                // Fetch all the meter from records, add into choice c1:
-                c1.add(rs.getString("meter"));
+            while (rs.next()) {
+                // Fetch all the meter from records, add into choice cSortByMeterNo:
+                cSortByMeterNo.add(rs.getString("meter"));
             }
-            
-            
-        }catch(Exception e){
+
+
+        } catch (Exception e) {
 
             e.printStackTrace();
             StringWriter errors = new StringWriter();
             e.printStackTrace(new PrintWriter(errors));
-            LOGGER.info("----DepositDetails:: Getting Exception DepositDetails Constructor----" + e.toString());
+            LOGGER.info("----DepositDetails:: Getting Exception DepositDetails Constructor----" + errors);
 
         }
-        // add the choice c1:
-        c1.setBounds(180,20, 150, 20);
-        add(c1);
-        
-        // add the choice c2:
-        c2.setBounds(520, 20, 150, 20);
-        c2.add("January");
-        c2.add("February");
-        c2.add("March");
-        c2.add("April");
-        c2.add("May");
-        c2.add("June");
-        c2.add("July");
-        c2.add("August");
-        c2.add("September");
-        c2.add("October");
-        c2.add("November");
-        c2.add("December");
-        add(c2);
-        
-        // create Search Button and add:
-        b1 = new JButton("Search");
-        b1.setBounds(20, 70, 80, 20);
-        b1.addActionListener(this);
-        add(b1);
+        // add cSortByMeterNo into frame:
+        add(cSortByMeterNo);
 
-        // create Print Button and add:
-        b2 = new JButton("Print");
-        b2.setBounds(120, 70, 80, 20);
-        b2.addActionListener(this);
-        add(b2);
 
-        // For ScrollPane:
-        JScrollPane sp = new JScrollPane(t1);
+        //============================================================================================================//
+
+        /*----Label Sort by Month:----*/
+        lSortMonth = new JLabel("Sort By Month");
+        lSortMonth.setBounds(380, 20, 100, 20);
+        lSortMonth.setFont(new Font("Tahoma", Font.BOLD, 12));
+        // add lSortMonth into frame:
+        add(lSortMonth);
+
+        /*----Choice Sort by Month:----*/
+        cSortMonth = new Choice();
+        cSortMonth.setBounds(500, 20, 150, 20);
+        cSortMonth.setForeground(new Color(0, 102, 102));
+        cSortMonth.setFont(new Font("Tahoma", Font.BOLD, 12));
+        cSortMonth.add("January");
+        cSortMonth.add("February");
+        cSortMonth.add("March");
+        cSortMonth.add("April");
+        cSortMonth.add("May");
+        cSortMonth.add("June");
+        cSortMonth.add("July");
+        cSortMonth.add("August");
+        cSortMonth.add("September");
+        cSortMonth.add("October");
+        cSortMonth.add("November");
+        cSortMonth.add("December");
+        // add cSortMonth into frame:
+        add(cSortMonth);
+
+        //============================================================================================================//
+
+        /*----Create table:----*/
+        billTable = new JTable(y, x);
+
+        try {
+
+            // Connection With Database:
+            Connection c = ConnectionProvider.getConnection();
+            Statement s = c.createStatement();
+
+            String billQuery = "select * from bill";
+            LOGGER.info("billQuery: " + billQuery);
+
+            // Fetch the all records from bill table:
+            ResultSet rs = s.executeQuery(billQuery);
+
+            // set the  model to JTable billTable:
+            billTable.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            StringWriter errors = new StringWriter();
+            e.printStackTrace(new PrintWriter(errors));
+            LOGGER.info("----DepositDetails:: Getting Exception DepositDetails Constructor----" + errors);
+
+        }
+
+        /*----For ScrollPane:----*/
+        JScrollPane sp = new JScrollPane(billTable);
         sp.setBounds(0, 100, 700, 650);
+        // add scroll pane into frame:
         add(sp);
-        
+
+        //============================================================================================================//
+
+        /*----create Search Button and add properties:----*/
+        ImageIcon searchIcon = new ImageIcon(ClassLoader.getSystemResource("icon/Search.jpg"));
+        Image searchImage = searchIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        searchButton = new JButton("Search", new ImageIcon(searchImage));
+        searchButton.setBounds(160, 70, 110, 20);
+        searchButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+        searchButton.addActionListener(this);
+        // add searchButton into frame:
+        add(searchButton);
+
+        //============================================================================================================//
+
+        /*----create Print Button and add properties:----*/
+        ImageIcon printIcon = new ImageIcon(ClassLoader.getSystemResource("icon/print.png"));
+        Image printImage = printIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        printButton = new JButton("Print", new ImageIcon(printImage));
+        printButton.setBounds(290, 70, 110, 20);
+        printButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+        printButton.addActionListener(this);
+        // add printButton into frame:
+        add(printButton);
+
+        //============================================================================================================//
+
+
+        /*----create Cancel Button and add properties:----*/
+        ImageIcon cancelIcon = new ImageIcon(ClassLoader.getSystemResource("icon/cancel.jpg"));
+        Image cancelImage = cancelIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        cancelButton = new JButton("Cancel", new ImageIcon(cancelImage));
+        cancelButton.setBounds(420, 70, 110, 20);
+        cancelButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+        cancelButton.addActionListener(this);
+        // add cancelButton into frame:
+        add(cancelButton);
+
     }
-    public void actionPerformed(ActionEvent ae){
+
+    public static void main (String[] args) {
+        LOGGER.info("==: DepositDetails:: Inside main Method :==");
+        new DepositDetails().setVisible(true);
+    }
+
+    public void actionPerformed (ActionEvent ae) {
 
         LOGGER.info("==: DepositDetails:: Inside actionPerformed Method :==");
 
         // If click the Button Search:
-        if(ae.getSource() == b1){
+        if (ae.getSource() == searchButton) {
 
-            String str = "select * from bill where meter = '"+c1.getSelectedItem()+"' AND month = '"+c2.getSelectedItem()+"'";
+            String billQuery =
+                    "select * from bill where meter = '" + cSortByMeterNo.getSelectedItem() + "' AND month = '" + cSortMonth.getSelectedItem() + "'";
 
-            try{
+            LOGGER.info("billQuery: " + billQuery);
+
+            try {
 
                 // Connection with database:
                 Connection c = ConnectionProvider.getConnection();
                 Statement s = c.createStatement();
 
-                // Fetch the all records from bill where meter = c1.getSelectedItem();
-                ResultSet rs = s.executeQuery(str);
+                // Fetch the all records from bill where meter = cSortByMeterNo.getSelectedItem() AND month =
+                // cSortMonth.getSelectedItem();
+                ResultSet rs = s.executeQuery(billQuery);
 
-                // added into t1 table:
-                t1.setModel(DbUtils.resultSetToTableModel(rs));
+                // added into billTable table:
+                billTable.setModel(DbUtils.resultSetToTableModel(rs));
 
-            }catch(Exception e){
-
-                e.printStackTrace();
-                StringWriter errors = new StringWriter();
-                e.printStackTrace(new PrintWriter(errors));
-                LOGGER.info("----DepositDetails:: Getting Exception actionPerformed Method----" + e.toString());
-
-            }
-
-        // If click on Button Print:
-        }else if(ae.getSource() == b2){
-
-            try{
-
-                t1.print();
-
-            }catch(Exception e){
+            } catch (Exception e) {
 
                 e.printStackTrace();
                 StringWriter errors = new StringWriter();
                 e.printStackTrace(new PrintWriter(errors));
-                LOGGER.info("----DepositDetails:: Getting Exception actionPerformed Method----" + e.toString());
+                LOGGER.info("----DepositDetails:: Getting Exception actionPerformed Method----" + e);
 
             }
+
+            // If click on Button Print:
+        } else if (ae.getSource() == printButton) {
+
+            try {
+
+                billTable.print();
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                StringWriter errors = new StringWriter();
+                e.printStackTrace(new PrintWriter(errors));
+                LOGGER.info("----DepositDetails:: Getting Exception actionPerformed Method----" + e);
+
+            }
+            // If click on Cancel Print:
+        } else if (ae.getSource() == cancelButton) {
+            // simply close the current frame:
+            this.setVisible(false);
         }
     }
-    
-    public static void main(String[] args){
-        LOGGER.info("==: DepositDetails:: Inside main Method :==");
-        new DepositDetails().setVisible(true);
-    }
-    
+
 }

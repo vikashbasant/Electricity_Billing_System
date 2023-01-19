@@ -1,4 +1,3 @@
-
 package electricity;
 
 import javax.swing.*;
@@ -12,9 +11,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
-public class UpdateInformation extends JFrame implements ActionListener{
+public class UpdateInformation extends JFrame implements ActionListener {
 
-    private static final Logger LOGGER =Logger.getLogger(String.valueOf(UpdateInformation.class));
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(UpdateInformation.class));
 
     JTextField t1, t2, t3, t4, t5, t6, t7;
 
@@ -24,7 +23,7 @@ public class UpdateInformation extends JFrame implements ActionListener{
 
     String meter;
 
-    UpdateInformation(String meter){
+    UpdateInformation (String meter) {
 
         LOGGER.info("==: UpdateInformation:: Inside UpdateInformation Consturctor :==");
 
@@ -46,7 +45,7 @@ public class UpdateInformation extends JFrame implements ActionListener{
         JLabel l1 = new JLabel("Name");
         l1.setBounds(30, 70, 100, 20);
         add(l1);
-        
+
         l11 = new JLabel();
         l11.setBounds(230, 70, 200, 20);
         add(l11);
@@ -55,7 +54,7 @@ public class UpdateInformation extends JFrame implements ActionListener{
         JLabel l2 = new JLabel("Meter Number");
         l2.setBounds(30, 110, 100, 20);
         add(l2);
-        
+
         l12 = new JLabel();
         l12.setBounds(230, 110, 200, 20);
         add(l12);
@@ -118,23 +117,23 @@ public class UpdateInformation extends JFrame implements ActionListener{
         b1.setBounds(70, 360, 100, 25);
         b1.addActionListener(this);
         add(b1);
-        
+
         b2 = new JButton("Back");
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         b2.setBounds(230, 360, 100, 25);
         b2.addActionListener(this);
         add(b2);
-        
-        try{
+
+        try {
             // Connection with database:
             Connection c = ConnectionProvider.getConnection();
             Statement s = c.createStatement();
 
             // Fetch the records from customer where meter = ?:
-            ResultSet rs = s.executeQuery("select * from customer where meter = '"+meter+"'");
+            ResultSet rs = s.executeQuery("select * from customer where meter = '" + meter + "'");
 
-            while(rs.next()){
+            while (rs.next()) {
 
                 // Fetch customer name and set into l11:
                 l11.setText(rs.getString(1));
@@ -142,7 +141,7 @@ public class UpdateInformation extends JFrame implements ActionListener{
                 // Fetch customer meter number set into l12:
                 l12.setText(rs.getString(2));
 
-                // Fetch customer address set into t1:
+                // Fetch customer address set into billTable:
                 t1.setText(rs.getString(3));
 
                 // Fetch customer city set into t2:
@@ -156,10 +155,10 @@ public class UpdateInformation extends JFrame implements ActionListener{
 
                 // Fetch customer Phone set into t5:
                 t5.setText(rs.getString(7));
-                
+
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
             StringWriter errors = new StringWriter();
@@ -171,20 +170,26 @@ public class UpdateInformation extends JFrame implements ActionListener{
 
         // Label ImageIcon
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/update.jpg"));
-        Image i2  = i1.getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
-        JLabel l8  = new JLabel(i3);
+        JLabel l8 = new JLabel(i3);
         l8.setBounds(550, 50, 400, 300);
         add(l8);
     }
 
+    public static void main (String[] args) {
+        LOGGER.info("==: UpdateInformation:: Inside main Method :==");
+        new UpdateInformation("").setVisible(true);
+
+    }
+
     @Override
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed (ActionEvent ae) {
 
         LOGGER.info("==: UpdateInformation:: Inside actionPerformed Method:==");
 
         // If click on Update Button:
-        if(ae.getSource() == b1){
+        if (ae.getSource() == b1) {
 
             // Fetch all the textfield value and update into customer table:
             String s1 = l11.getText();
@@ -194,15 +199,15 @@ public class UpdateInformation extends JFrame implements ActionListener{
             String s5 = t3.getText();
             String s6 = t4.getText();
             String s7 = t5.getText();
-            
-            try{
+
+            try {
 
                 // Connection with database:
                 Connection c = ConnectionProvider.getConnection();
                 Statement s = c.createStatement();
 
                 // update into customer table with meter = ?:
-                s.executeUpdate("update customer set address = '"+s3+"', city = '"+s4+"', state = '"+s5+"', email = '"+s6+"', phone = '"+s7+"' where meter = '"+meter+"'");
+                s.executeUpdate("update customer set address = '" + s3 + "', city = '" + s4 + "', state = '" + s5 + "', email = '" + s6 + "', phone = '" + s7 + "' where meter = '" + meter + "'");
 
                 // after successfully update into customer table just shows pop-up:
                 // "Details Updated Successfully"
@@ -210,28 +215,22 @@ public class UpdateInformation extends JFrame implements ActionListener{
 
                 // Now simply close the current window:
                 this.setVisible(false);
-                
-            }catch(Exception e){
+
+            } catch (Exception e) {
 
                 e.printStackTrace();
                 StringWriter errors = new StringWriter();
                 e.printStackTrace(new PrintWriter(errors));
-                LOGGER.info("----UpdateInformation:: Getting Exception actionPerformed Method----" + e.toString());
+                LOGGER.info("----UpdateInformation:: Getting Exception actionPerformed Method----" + e);
 
             }
 
-        // If click Back Button:
-        }else if(ae.getSource() == b2){
+            // If click Back Button:
+        } else if (ae.getSource() == b2) {
 
             // then simply close the current window:
             this.setVisible(false);
-            
+
         }
-    }
-    
-    public static void main(String[] args){
-        LOGGER.info("==: UpdateInformation:: Inside main Method :==");
-        new UpdateInformation("").setVisible(true);
-        
     }
 }
