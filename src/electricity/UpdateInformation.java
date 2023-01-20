@@ -15,146 +15,192 @@ public class UpdateInformation extends JFrame implements ActionListener {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(UpdateInformation.class));
 
-    JTextField t1, t2, t3, t4, t5, t6, t7;
+    JTextField tAddress, tCity, tState, tEmail, tPhone;
 
-    JLabel l11, l12;
+    JLabel lNameValue, lMeterValue;
 
-    JButton b1, b2;
+    JButton updateButton, backButton;
 
     String meter;
 
     UpdateInformation (String meter) {
 
-        LOGGER.info("==: UpdateInformation:: Inside UpdateInformation Consturctor :==");
+        //============================================================================================================//
 
-        // Set the meter value:
+        LOGGER.info("==: UpdateInformation:: Inside UpdateInformation Constructor :==");
+
+        //============================================================================================================//
+
+        /*----Set the meter value:----*/
         this.meter = meter;
 
-        // Set the Bounds:
-        setBounds(500, 220, 1050, 450);
+        //============================================================================================================//
+
+        /*----Create Frame----*/
+        setBounds(500, 220, 1050, 500);
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
 
-        // Label UPDATE CUSTOMER INFORMATION:
+        //============================================================================================================//
+
+        /*----Label UPDATE CUSTOMER INFORMATION:----*/
         JLabel title = new JLabel("UPDATE CUSTOMER INFORMATION");
         title.setBounds(110, 0, 400, 30);
-        title.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        title.setFont(new Font("Tahoma", Font.BOLD, 20));
+        // add title into frame:
         add(title);
 
-        // Label Name:
-        JLabel l1 = new JLabel("Name");
-        l1.setBounds(30, 70, 100, 20);
-        add(l1);
+        //============================================================================================================//
 
-        l11 = new JLabel();
-        l11.setBounds(230, 70, 200, 20);
-        add(l11);
+        /*----Label Name:----*/
+        JLabel lName = new JLabel("Name");
+        lName.setBounds(30, 70, 100, 20);
+        lName.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lName.setForeground(new Color(0, 102, 102));
+        // add lName into frame:
+        add(lName);
 
-        // Label Meter Number:
-        JLabel l2 = new JLabel("Meter Number");
-        l2.setBounds(30, 110, 100, 20);
-        add(l2);
+        /*----Label Name Value:----*/
+        lNameValue = new JLabel();
+        lNameValue.setBounds(230, 70, 200, 20);
+        lNameValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lNameValue into frame:
+        add(lNameValue);
 
-        l12 = new JLabel();
-        l12.setBounds(230, 110, 200, 20);
-        add(l12);
+        //============================================================================================================//
 
-        // Label Address:
-        JLabel l3 = new JLabel("Address");
-        l3.setBounds(30, 150, 100, 20);
-        add(l3);
+        /*----Label Meter Number:----*/
+        JLabel lMeterNo = new JLabel("Meter Number");
+        lMeterNo.setBounds(30, 110, 100, 20);
+        lMeterNo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lMeterNo into frame:
+        add(lMeterNo);
 
-        // TextFiled Address:
-        t1 = new JTextField();
-        t1.setBounds(230, 150, 200, 20);
-        add(t1);
+        /*----Label Meter Value----*/
+        lMeterValue = new JLabel();
+        lMeterValue.setBounds(230, 110, 200, 20);
+        lMeterValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lMeterValue.setForeground(new Color(0, 102, 102));
+        // add lMeterValue into frame:
+        add(lMeterValue);
 
-        // Label City:
-        JLabel l4 = new JLabel("City");
-        l4.setBounds(30, 190, 100, 20);
-        add(l4);
+        //============================================================================================================//
 
-        // TextFiled City:
-        t2 = new JTextField();
-        t2.setBounds(230, 190, 200, 20);
-        add(t2);
+        /*----Label Address:----*/
+        JLabel lAddress = new JLabel("Address");
+        lAddress.setBounds(30, 150, 100, 20);
+        lAddress.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lAddress into frame:
+        add(lAddress);
 
-        // Label State:
-        JLabel l5 = new JLabel("State");
-        l5.setBounds(30, 230, 100, 20);
-        add(l5);
+        /*----TextFiled Address:----*/
+        tAddress = new JTextField();
+        tAddress.setBounds(230, 150, 200, 20);
+        tAddress.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add tAddress into frame:
+        add(tAddress);
 
-        // TextFiled State:
-        t3 = new JTextField();
-        t3.setBounds(230, 230, 200, 20);
-        add(t3);
+        //============================================================================================================//
 
-        // Label Email:
-        JLabel l6 = new JLabel("Email");
-        l6.setBounds(30, 270, 100, 20);
-        add(l6);
+        /*----Label City:----*/
+        JLabel lCity = new JLabel("City");
+        lCity.setBounds(30, 190, 100, 20);
+        lCity.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lCity into frame:
+        add(lCity);
 
-        // TextField Email:
-        t4 = new JTextField();
-        t4.setBounds(230, 270, 200, 20);
-        add(t4);
+        /*----TextFiled City:----*/
+        tCity = new JTextField();
+        tCity.setBounds(230, 190, 200, 20);
+        tCity.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add tCity into frame:
+        add(tCity);
 
-        // Label Phone:
-        JLabel l7 = new JLabel("Phone");
-        l7.setBounds(30, 310, 100, 20);
-        add(l7);
+        //============================================================================================================//
 
-        // TextField Phone:
-        t5 = new JTextField();
-        t5.setBounds(230, 310, 200, 20);
-        add(t5);
+        /*----Label State:----*/
+        JLabel lState = new JLabel("State");
+        lState.setBounds(30, 230, 100, 20);
+        lState.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add tState into frame:
+        add(lState);
+
+        /*----TextFiled State:----*/
+        tState = new JTextField();
+        tState.setBounds(230, 230, 200, 20);
+        tState.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add tState into frame:
+        add(tState);
+
+        //============================================================================================================//
+
+        /*----Label Email:----*/
+        JLabel lEmail = new JLabel("Email");
+        lEmail.setBounds(30, 270, 100, 20);
+        lEmail.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lEmail into frame:
+        add(lEmail);
+
+        /*----TextField Email:----*/
+        tEmail = new JTextField();
+        tEmail.setBounds(230, 270, 200, 20);
+        tEmail.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add tEmail into frame:
+        add(tEmail);
+
+        //============================================================================================================//
+
+        /*----Label Phone:----*/
+        JLabel lPhone = new JLabel("Phone");
+        lPhone.setBounds(30, 310, 100, 20);
+        lPhone.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lPhone into frame:
+        add(lPhone);
+
+        /*----TextField Phone:----*/
+        tPhone = new JTextField();
+        tPhone.setBounds(230, 310, 200, 20);
+        tPhone.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add tPhone into frame:
+        add(tPhone);
 
 
-        // Create Update and Back Button and set properties to that button:
-        b1 = new JButton("Update");
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
-        b1.setBounds(70, 360, 100, 25);
-        b1.addActionListener(this);
-        add(b1);
+        //============================================================================================================//
 
-        b2 = new JButton("Back");
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
-        b2.setBounds(230, 360, 100, 25);
-        b2.addActionListener(this);
-        add(b2);
 
         try {
             // Connection with database:
             Connection c = ConnectionProvider.getConnection();
             Statement s = c.createStatement();
 
+            String customerQuery = "select * from customer where meter = '" + meter + "'";
+            LOGGER.info("Customer query: " + customerQuery);
+
             // Fetch the records from customer where meter = ?:
-            ResultSet rs = s.executeQuery("select * from customer where meter = '" + meter + "'");
+            ResultSet rs = s.executeQuery(customerQuery);
 
             while (rs.next()) {
 
-                // Fetch customer name and set into l11:
-                l11.setText(rs.getString(1));
+                // Fetch customer name and set into lNameValue:
+                lNameValue.setText(rs.getString(1));
 
-                // Fetch customer meter number set into l12:
-                l12.setText(rs.getString(2));
+                // Fetch customer meter number set into lMeterValue:
+                lMeterValue.setText(rs.getString(2));
 
                 // Fetch customer address set into billTable:
-                t1.setText(rs.getString(3));
+                tAddress.setText(rs.getString(3));
 
-                // Fetch customer city set into t2:
-                t2.setText(rs.getString(4));
+                // Fetch customer city set into tCity:
+                tCity.setText(rs.getString(4));
 
-                // Fetch customer state set into t3:
-                t3.setText(rs.getString(5));
+                // Fetch customer state set into tState:
+                tState.setText(rs.getString(5));
 
-                // Fetch customer Email set into t4:
-                t4.setText(rs.getString(6));
+                // Fetch customer Email set into tEmail:
+                tEmail.setText(rs.getString(6));
 
-                // Fetch customer Phone set into t5:
-                t5.setText(rs.getString(7));
+                // Fetch customer Phone set into tPhone:
+                tPhone.setText(rs.getString(7));
 
             }
 
@@ -163,18 +209,46 @@ public class UpdateInformation extends JFrame implements ActionListener {
             e.printStackTrace();
             StringWriter errors = new StringWriter();
             e.printStackTrace(new PrintWriter(errors));
-            LOGGER.info("==: UpdateInformation:: Inside UpdateInformation Constructor :==");
+            LOGGER.info("----UpdateInformation:: Getting Exception----" + errors);
 
         }
 
+        //============================================================================================================//
 
-        // Label ImageIcon
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/update.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT);
-        ImageIcon i3 = new ImageIcon(i2);
-        JLabel l8 = new JLabel(i3);
-        l8.setBounds(550, 50, 400, 300);
-        add(l8);
+        /*----Create Update and Back Button and set properties to that button:----*/
+        ImageIcon updateIcon = new ImageIcon(ClassLoader.getSystemResource("icon/update.jpg"));
+        Image updateImage = updateIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        updateButton = new JButton("Update", new ImageIcon(updateImage));
+        updateButton.setBackground(Color.WHITE);
+        updateButton.setForeground(Color.BLACK);
+        updateButton.setBounds(70, 360, 130, 25);
+        updateButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        updateButton.addActionListener(this);
+        // add updateButton into frame:
+        add(updateButton);
+
+        ImageIcon backIcon = new ImageIcon(ClassLoader.getSystemResource("icon/back3.png"));
+        Image backImage = backIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        backButton = new JButton("Back", new ImageIcon(backImage));
+        backButton.setBackground(Color.WHITE);
+        backButton.setForeground(Color.BLACK);
+        backButton.setBounds(230, 360, 130, 25);
+        backButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        backButton.addActionListener(this);
+        // add backButton into frame:
+        add(backButton);
+
+
+        //============================================================================================================//
+
+
+        /*----Label ImageIcon----*/
+        ImageIcon iconUpdate = new ImageIcon(ClassLoader.getSystemResource("icon/update.jpg"));
+        Image imageUpdate = iconUpdate.getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT);
+        JLabel lUpdate = new JLabel(new ImageIcon(imageUpdate));
+        lUpdate.setBounds(550, 50, 400, 300);
+        // add lUpdate into frame:
+        add(lUpdate);
     }
 
     public static void main (String[] args) {
@@ -188,17 +262,29 @@ public class UpdateInformation extends JFrame implements ActionListener {
 
         LOGGER.info("==: UpdateInformation:: Inside actionPerformed Method:==");
 
-        // If click on Update Button:
-        if (ae.getSource() == b1) {
+        // If click on Update Button: Simply update the all information for selected meter no:
+        if (ae.getSource() == updateButton) {
 
-            // Fetch all the textfield value and update into customer table:
-            String s1 = l11.getText();
-            String s2 = l12.getText();
-            String s3 = t1.getText();
-            String s4 = t2.getText();
-            String s5 = t3.getText();
-            String s6 = t4.getText();
-            String s7 = t5.getText();
+            // Fetch text value of address:
+            String addressValue = tAddress.getText();
+            LOGGER.info("addressValue: " + addressValue);
+
+            // Fetch text value of City:
+            String cityValue = tCity.getText();
+            LOGGER.info("cityValue: " + cityValue);
+
+            // Fetch text value of state:
+            String stateValue = tState.getText();
+            LOGGER.info("stateValue: " + stateValue);
+
+            // Fetch text value of Email:
+            String emailValue = tEmail.getText();
+            LOGGER.info("emailValue: " + emailValue);
+
+            // Fetch text value of phone:
+            String phoneValue = tPhone.getText();
+            LOGGER.info("phoneValue: " + phoneValue);
+
 
             try {
 
@@ -207,7 +293,14 @@ public class UpdateInformation extends JFrame implements ActionListener {
                 Statement s = c.createStatement();
 
                 // update into customer table with meter = ?:
-                s.executeUpdate("update customer set address = '" + s3 + "', city = '" + s4 + "', state = '" + s5 + "', email = '" + s6 + "', phone = '" + s7 + "' where meter = '" + meter + "'");
+                String customerQuery = "update customer set address = '" + addressValue + "', city = '" + cityValue +
+                        "', state " +
+                        "= " +
+                        "'" + stateValue + "', email = '" + emailValue + "', phone = '" + phoneValue + "' where meter = '" + meter +
+                        "'";
+                LOGGER.info("customerQuery: " + customerQuery);
+
+                s.executeUpdate(customerQuery);
 
                 // after successfully update into customer table just shows pop-up:
                 // "Details Updated Successfully"
@@ -226,7 +319,7 @@ public class UpdateInformation extends JFrame implements ActionListener {
             }
 
             // If click Back Button:
-        } else if (ae.getSource() == b2) {
+        } else if (ae.getSource() == backButton) {
 
             // then simply close the current window:
             this.setVisible(false);
