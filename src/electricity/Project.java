@@ -414,7 +414,10 @@ public class Project extends JFrame implements ActionListener {
             // If msg is "Logout" then simply close the window and go back to login page:
         } else if (msg.equals("Logout")) {
 
+            // close the current frame:
             this.setVisible(false);
+
+            // simply open login frame:
             new Login().setVisible(true);
 
             // If msg is "Generate Bill" then Generate Bill Page is open:
