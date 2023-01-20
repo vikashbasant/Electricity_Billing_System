@@ -13,143 +13,209 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
-public class PayBill extends JFrame implements ActionListener{
+public class PayBill extends JFrame implements ActionListener {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(PayBill.class));
 
-    JLabel l1,l2,l3,l4,l5, l6;
+    JLabel lMeterNo, lName, lMonth, lUnits, lTotalBill, lStatus;
 
-    JLabel l11, l12, l13, l14, l15;
+    JLabel lMeterValue, lNameValue, lUnitsValue, lTotalBillValue, lStatusValue;
 
     JTextField t1;
 
-    Choice c1,c2;
+    Choice cMonth, c2;
 
-    JButton b1,b2;
+    JButton payButton, backButton;
 
     String meter;
 
-    PayBill(String meter){
+    PayBill (String meter) {
+
+        //============================================================================================================//
 
         LOGGER.info("==:PayBill:: Inside PayBill Constructor:==");
 
-        // set the meter:
-        this.meter = meter;
-        setLayout(null);
-        
-        setBounds(550, 220, 900, 600);
+        //============================================================================================================//
 
-        // Label "Electricity Bill"
+        /*----set the meter:----*/
+        this.meter = meter;
+
+        //============================================================================================================//
+
+        /*----Create Frame----*/
+        setLayout(null);
+        setBounds(550, 220, 900, 600);
+        // set the contentPane color to white:
+        getContentPane().setBackground(Color.WHITE);
+
+        //============================================================================================================//
+
+        /*----Label "Electricity Bill":----*/
         JLabel title = new JLabel("Electricity Bill");
         title.setFont(new Font("Tahoma", Font.BOLD, 24));
         title.setBounds(120, 5, 400, 30);
+        // add title into frame:
         add(title);
 
-        // Label Meter No
-        l1 = new JLabel("Meter No");
-        l1.setBounds(35, 80, 200, 20);
-        add(l1);
+        //============================================================================================================//
 
-        // Label Meter No Value:
-        JLabel l11 = new JLabel();
-        l11.setBounds(300, 80, 200, 20);
-        add(l11);
+        /*----Label Meter No----*/
+        lMeterNo = new JLabel("Meter No");
+        lMeterNo.setBounds(35, 80, 200, 20);
+        lMeterNo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lMeterNo into frame:
+        add(lMeterNo);
 
-        // Label Name:
-        JLabel l2 = new JLabel("Name");
-        l2.setBounds(35, 140, 200, 20);
-        add(l2);
+        /*----Label Meter No Value:----*/
+        lMeterValue = new JLabel();
+        lMeterValue.setBounds(300, 80, 200, 20);
+        lMeterValue.setForeground(new Color(0, 102, 102));
+        lMeterValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lMeterValue into frame:
+        add(lMeterValue);
 
-        // Label Name Value:
-        JLabel l12 = new JLabel();
-        l12.setBounds(300, 140, 200, 20);
-        add(l12);
+        //============================================================================================================//
 
-        // Label Month:
-        l3 = new JLabel("Month");
-        l3.setBounds(35, 200, 200, 20);
-        add(l3);
+        /*----Label Name:----*/
+        lName = new JLabel("Name");
+        lName.setBounds(35, 140, 200, 20);
+        lName.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lName into frame:
+        add(lName);
 
-        // choice:
-        c1 = new Choice();
-        c1.setBounds(300, 200, 200, 20);
-        c1.add("January");
-        c1.add("February");
-        c1.add("March");
-        c1.add("April");
-        c1.add("May");
-        c1.add("June");
-        c1.add("July");
-        c1.add("August");
-        c1.add("September");
-        c1.add("October");
-        c1.add("November");
-        c1.add("December");
-        add(c1);
-        
+        /*----Label Name Value:----*/
+        lNameValue = new JLabel();
+        lNameValue.setBounds(300, 140, 200, 20);
+        lNameValue.setForeground(new Color(0, 102, 102));
+        lNameValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lNameValue into frame:
+        add(lNameValue);
 
-        // Label Units:
-        l4 = new JLabel("Units");
-        l4.setBounds(35, 260, 200, 20);
-        add(l4);
 
-        // Label Units Value:
-        JLabel l13 = new JLabel();
-        l13.setBounds(300, 260, 200, 20);
-        add(l13);
+        //============================================================================================================//
 
-        // Label Total Bill:
-        l5 = new JLabel("Total Bill");
-        l5.setBounds(35, 320, 200, 20);
-        add(l5);
+        /*----Label Month:----*/
+        lMonth = new JLabel("Month");
+        lMonth.setBounds(35, 200, 200, 20);
+        lMonth.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lMonth into frame:
+        add(lMonth);
 
-        // Label Total Bill Value:
-        JLabel l14 = new JLabel();
-        l14.setBounds(300, 320, 200, 20);
-        add(l14);
+        /*----choice Month----*/
+        cMonth = new Choice();
+        cMonth.setBounds(300, 200, 200, 20);
+        cMonth.setFont(new Font("Tahoma", Font.BOLD, 14));
+        cMonth.setForeground(new Color(0, 102, 102));
+        cMonth.add("January");
+        cMonth.add("February");
+        cMonth.add("March");
+        cMonth.add("April");
+        cMonth.add("May");
+        cMonth.add("June");
+        cMonth.add("July");
+        cMonth.add("August");
+        cMonth.add("September");
+        cMonth.add("October");
+        cMonth.add("November");
+        cMonth.add("December");
+        // add cMonth into frame:
+        add(cMonth);
 
-        // Label Status:
-        l6 = new JLabel("Status");
-        l6.setBounds(35, 380, 200, 20);
-        add(l6);
 
-        // Label Status Value:
-        JLabel l15 = new JLabel();
-        l15.setBounds(300, 380, 200, 20);
-        l15.setForeground(Color.RED);
-        add(l15);
-        
-        
-        
-        try{
+        //============================================================================================================//
+
+
+        /*----Label Units:----*/
+        lUnits = new JLabel("Units");
+        lUnits.setBounds(35, 260, 200, 20);
+        lUnits.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lUnits into frame:
+        add(lUnits);
+
+        /*----Label Units Value:----*/
+        lUnitsValue = new JLabel();
+        lUnitsValue.setBounds(300, 260, 200, 20);
+        lUnitsValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lUnitsValue.setForeground(new Color(0, 102, 102));
+        // add lUnitsValue into frame:
+        add(lUnitsValue);
+
+        //============================================================================================================//
+
+        /*----Label Total Bill:----*/
+        lTotalBill = new JLabel("Total Bill");
+        lTotalBill.setBounds(35, 320, 200, 20);
+        lTotalBill.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lTotalBill into frame:
+        add(lTotalBill);
+
+        /*----Label Total Bill Value:----*/
+        lTotalBillValue = new JLabel();
+        lTotalBillValue.setBounds(300, 320, 200, 20);
+        lTotalBillValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lTotalBillValue.setForeground(new Color(0, 102, 102));
+        // add lTotalBillValue into frame:
+        add(lTotalBillValue);
+
+        //============================================================================================================//
+
+        /*----Label Status:----*/
+        lStatus = new JLabel("Status");
+        lStatus.setBounds(35, 380, 200, 20);
+        lStatus.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add lStatus into frame:
+        add(lStatus);
+
+        /*----Label Status Value:----*/
+        lStatusValue = new JLabel();
+        lStatusValue.setBounds(300, 380, 200, 20);
+        lStatusValue.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lStatusValue.setForeground(Color.RED);
+        // add lStatusValue into frame:
+        add(lStatusValue);
+
+        //============================================================================================================//
+
+        /*
+            1. Fetch meter and name from customer table and put into meterValue and nameValue:
+            2. Fetch units, total Bill and status from bill table and put into units and totalBill and status value:
+         */
+
+        try {
 
             // Connection with database:
             Connection c = ConnectionProvider.getConnection();
             Statement s = c.createStatement();
 
-            // Fetch all the records from customer table where meter = ? :
-            ResultSet rs = s.executeQuery("select * from customer where meter = '"+meter+"'");
+            String customerQuery = "select * from customer where meter = '" + meter + "'";
+            LOGGER.info("customerQuery: " + customerQuery);
 
-            while(rs.next()){
-                // Fetch the meter no and name from resultSet and set into l11 and l12:
-                l11.setText(rs.getString("meter"));
-                l12.setText(rs.getString("name"));
+            // Fetch all the records from customer table where meter = ? :
+            ResultSet rs = s.executeQuery(customerQuery);
+
+            while (rs.next()) {
+                // Fetch the meter no and name from resultSet and set into lMeterValue and lNameValue:
+                lMeterValue.setText(rs.getString("meter"));
+                lNameValue.setText(rs.getString("name"));
 
             }
+
+            String billQuery = "select * from bill where meter = '" + meter + "' AND month = 'January'";
+            LOGGER.info("billQuery: " + billQuery);
 
             // Fetch all the records from bill table where meter = ?:
-            rs = s.executeQuery("select * from bill where meter = '"+meter+"' AND month = 'January' ");
+            rs = s.executeQuery(billQuery);
 
-            while(rs.next()){
+            while (rs.next()) {
 
                 // Fetch all the information and set into related label:
-                l13.setText(rs.getString("units"));
-                l14.setText(rs.getString("total_bill"));
-                l15.setText(rs.getString("status"));
+                lUnitsValue.setText(rs.getString("units"));
+                lTotalBillValue.setText(rs.getString("total_bill"));
+                lStatusValue.setText(rs.getString("status"));
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
             StringWriter errors = new StringWriter();
@@ -157,29 +223,42 @@ public class PayBill extends JFrame implements ActionListener{
             LOGGER.info("----PayBill:: Getting Exception PayBill Constructor----" + e.getMessage());
 
         }
-        
-        c1.addItemListener(new ItemListener(){
-            @Override
-            public void itemStateChanged(ItemEvent ae){
 
-                try{
+        //============================================================================================================//
+
+        /*
+            1. adding itemListener on choice of month then simply all the information like units, totalBill and
+            status from bill table and put into unitsValue and totalBillValue and statusValue:
+         */
+        cMonth.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged (ItemEvent ae) {
+
+                try {
 
                     // Connection with database:
                     Connection c = ConnectionProvider.getConnection();
                     Statement s = c.createStatement();
 
-                    // Fetch all the records from bill table where meter = ? and month = ?:
-                    ResultSet rs = s.executeQuery("select * from bill where meter = '"+meter+"' AND month = '"+c1.getSelectedItem()+"'");
+                    String billQuery =
+                            "select * from bill where meter = '" + meter + "' AND month = '" + cMonth.getSelectedItem() + "'";
 
-                    while(rs.next()){
+                    LOGGER.info("billQuery: " + billQuery);
+
+                    // Fetch all the records from bill table where meter = ? and month = ?:
+                    ResultSet rs = s.executeQuery(billQuery);
+
+
+                    while (rs.next()) {
                         // Fetch all the information and set label:
-                        l13.setText(rs.getString("units"));
-                        l14.setText(rs.getString("total_bill"));
-                        l15.setText(rs.getString("status"));
+                        lUnitsValue.setText(rs.getString("units"));
+                        lTotalBillValue.setText(rs.getString("total_bill"));
+                        lStatusValue.setText(rs.getString("status"));
 
                     }
 
-                }catch(Exception e){
+
+                } catch (Exception e) {
 
                     e.printStackTrace();
                     StringWriter errors = new StringWriter();
@@ -191,63 +270,82 @@ public class PayBill extends JFrame implements ActionListener{
         });
 
 
-        // Create Button Pay and Back:
-        b1 = new JButton("Pay");
-        b1.setBounds(100, 460, 100, 25);
-        add(b1);
+        //============================================================================================================//
 
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
+        /*----Create Button Pay and Back:----*/
+        ImageIcon payIcon = new ImageIcon(ClassLoader.getSystemResource("icon/pay.png"));
+        Image payImage = payIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        payButton = new JButton("Pay", new ImageIcon(payImage));
+        payButton.setBackground(Color.WHITE);
+        payButton.setForeground(Color.BLACK);
+        payButton.setBounds(100, 460, 100, 25);
+        payButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        // add payButton into frame:
+        add(payButton);
 
 
-        b2 = new JButton("Back");
-        b2.setBounds(230, 460, 100, 25);
-        add(b2);
+        ImageIcon backIcon = new ImageIcon(ClassLoader.getSystemResource("icon/back3.png"));
+        Image backImage = backIcon.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        backButton = new JButton("Back", new ImageIcon(backImage));
+        backButton.setBackground(Color.WHITE);
+        backButton.setForeground(Color.BLACK);
+        backButton.setBounds(230, 460, 100, 25);
+        backButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        backButton.addActionListener(this);
+        // add backButton into frame:
+        add(backButton);
 
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
 
-        // Label Image Icon:
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/bill.png"));
-        Image i2 = i1.getImage().getScaledInstance(600, 300,Image.SCALE_DEFAULT);
-        ImageIcon i3 = new ImageIcon(i2);
-        JLabel l21 = new JLabel(i3);
-        l21.setBounds(400, 120, 600, 300);
-        add(l21);
+        //============================================================================================================//
+
+        /*----Label Image Icon:----*/
+        ImageIcon billIcon = new ImageIcon(ClassLoader.getSystemResource("icon/bill.png"));
+        Image billImage = billIcon.getImage().getScaledInstance(600, 300, Image.SCALE_DEFAULT);
+        JLabel lBillIcon = new JLabel(new ImageIcon(billImage));
+        lBillIcon.setBounds(400, 120, 600, 300);
+        add(lBillIcon);
 
         // adding action listener to Pay and Back Button:
-        b1.addActionListener(this);
-        b2.addActionListener(this);
+        payButton.addActionListener(this);
+        backButton.addActionListener(this);
 
-        // set the contentPane color to white:
-        getContentPane().setBackground(Color.WHITE);        
+
+    }
+
+    public static void main (String[] args) {
+        LOGGER.info("==: PayBill:: Inside main Method:==");
+        new PayBill("").setVisible(true);
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed (ActionEvent ae) {
 
         LOGGER.info("==: PayBill:: Inside actionPerformed Method:==");
 
         // If Click on Pay Button:
-        if(ae.getSource() == b1){
+        if (ae.getSource() == payButton) {
 
-            try{
+            try {
 
                 // Connection with database:
                 Connection c = ConnectionProvider.getConnection();
                 Statement s = c.createStatement();
 
-                // update the bill table status where meter = ? and month = ?:
-                s.executeUpdate("update bill set status = 'Paid' where meter = '"+meter+"' AND month = '"+c1.getSelectedItem()+"'");
+                String billQuery =
+                        "update bill set status = 'Paid' where meter = '" + meter + "' AND month = '" + cMonth.getSelectedItem() + "'";
+                LOGGER.info("billQuery: " + billQuery);
 
-                // simply close the current window:
+                // update the bill table status = 'Paid' where meter = ? and month = ?:
+                s.executeUpdate(billQuery);
+
+                // simply close the current Frame:
                 this.setVisible(false);
 
-                // open the Paytm page:
+                // open the Paytm frame:
                 new Paytm(meter).setVisible(true);
 
 
-            }catch(Exception e){
+            } catch (Exception e) {
 
                 e.printStackTrace();
                 StringWriter errors = new StringWriter();
@@ -257,17 +355,12 @@ public class PayBill extends JFrame implements ActionListener{
             }
 
 
-        // If click on Back Button:
-        }else if(ae.getSource()== b2){
+            // If click on Back Button:
+        } else if (ae.getSource() == backButton) {
 
             // Simply close the current window:
             this.setVisible(false);
 
-        }        
-    }
-
-    public static void main(String[] args){
-        LOGGER.info("==: PayBill:: Inside main Method:==");
-        new PayBill("").setVisible(true);
+        }
     }
 }
