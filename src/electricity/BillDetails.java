@@ -15,15 +15,11 @@ public class BillDetails extends JFrame {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(BillDetails.class));
 
-    JTable t1;
+    JTable tBillDetailsTable;
 
     String[] x = {"Meter Number", "Month", "Units", "Total Bill", "Status"};
 
     String[][] y = new String[40][8];
-
-    int i = 0;
-
-    int j = 0;
 
     BillDetails (String meter) {
 
@@ -46,7 +42,7 @@ public class BillDetails extends JFrame {
         //============================================================================================================//
 
         /*----create a table:----*/
-        t1 = new JTable(y, x);
+        tBillDetailsTable = new JTable(y, x);
 
         /*----Fetch all the information from bill table for specific meter no put into table----*/
 
@@ -63,7 +59,7 @@ public class BillDetails extends JFrame {
             ResultSet rs = s.executeQuery(billQuery);
 
             // set All the records into model:
-            t1.setModel(DbUtils.resultSetToTableModel(rs));
+            tBillDetailsTable.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (Exception e) {
 
@@ -77,7 +73,7 @@ public class BillDetails extends JFrame {
         //============================================================================================================//
 
         /*----set the scroll pane:----*/
-        JScrollPane sp = new JScrollPane(t1);
+        JScrollPane sp = new JScrollPane(tBillDetailsTable);
         sp.setBounds(0, 0, 700, 650);
         // scroll pane into frame:
         add(sp);
