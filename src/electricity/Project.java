@@ -189,6 +189,7 @@ public class Project extends JFrame implements ActionListener {
         /*----Inside Report Menu there is total 1 choice i.e(Generate Bill)----*/
         JMenu report = new JMenu("Report");
         JMenuItem rGenerateBill = new JMenuItem("Generate Bill");
+        JMenuItem rLastBill = new JMenuItem("Last Bill");
         report.setForeground(Color.BLUE);
 
         /* ---- Generate Bill ---- */
@@ -202,6 +203,18 @@ public class Project extends JFrame implements ActionListener {
 
         /*---- Adding action listener for all the menu item i.e rGenerateBill:Generate Bill----*/
         rGenerateBill.addActionListener(this);
+
+        /* ---- Last Bill ---- */
+        rLastBill.setFont(new Font("monospaced", Font.BOLD, 12));
+        ImageIcon iconLast = new ImageIcon(ClassLoader.getSystemResource("icon/icon7.png"));
+        Image imageLast = iconLast.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        rLastBill.setIcon(new ImageIcon(imageLast));
+        rLastBill.setMnemonic('L');
+        rLastBill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+        rLastBill.setBackground(Color.WHITE);
+
+        /*---- Adding action listener for all the menu item i.e rGenerateBill:Generate Bill----*/
+        rLastBill.addActionListener(this);
 
 
         //============================================================================================================//
@@ -291,6 +304,7 @@ public class Project extends JFrame implements ActionListener {
 
         /*----Inside Report Menu adding rGenerateBill: Generate Bill----*/
         report.add(rGenerateBill);
+        report.add(rLastBill);
 
         /*----Inside Utility Menu adding uNotepad:Notepad, uCalculator:Calculator, uWebBrowser:Web Browser----*/
         utility.add(uNotepad);
@@ -445,6 +459,10 @@ public class Project extends JFrame implements ActionListener {
 
             new BillDetails(meter).setVisible(true);
 
+        } else if (msg.equals("Last Bill")) {
+
+            // If msg is "Last Bill" then LastBill frame is open:
+            new LastBill(meter).setVisible(true);
         }
 
 

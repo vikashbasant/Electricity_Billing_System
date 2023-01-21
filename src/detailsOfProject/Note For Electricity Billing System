@@ -1,0 +1,30 @@
+1. Description Electricity Billing System for:
+    An electricity billing system is a system that calculates and generates bills for the consumption of electricity by customers.
+    It typically includes a meter to measure the amount of electricity used, a database to store customer information and usage data,
+    and a billing module to calculate the charges based on the rates established by the utility company.
+    The system may also provide the ability to view and pay bills online, as well as track usage and consumption history.
+
+
+2. An electricity billing system in Java flow diagram would typically involve the following steps:
+
+    Data input: The customer's meter reading, name, address, and account number are entered into the system through a
+    user interface built using Java.
+
+    Bill calculation: The system calculates the bill amount using Java programming logic based on the meter reading, customer information, and the rates established by the utility company.
+
+    Bill generation: The system generates the bill in the form of a pdf or other document using Java libraries such as iText.
+
+    Bill distribution: The bill is distributed to the customer via email or an online portal built using Java technologies such as Servlets and JSP.
+
+    Payment processing: The customer can view and pay the bill using a Java-based web application that integrates with payment gateways.
+
+    Payment confirmation: The system records the payment and updates the customer's account in the database using Java database connectivity (JDBC)
+
+
+3. About:
+    Electricity Billing System is a software-based application developed in Java programming language.
+    The project aims at serving the department of electricity by computerizing the billing system.
+    It mainly focuses on the calculation of Units consumed during the specified time and the money to be paid to electricity offices.
+    This computerized system will make the overall billing system easy accessible, comfortable and effective for
+    consumers.
+
