@@ -6,7 +6,7 @@
     and a billing module to calculate the charges based on the rates established by the utility company.
     The system may also provide the ability to view and pay bills online, as well as track usage and consumption history.
 
-   ![Project Overview](https://user-images.githubusercontent.com/49556058/213899672-7d83a298-28b1-4706-80ea-9625eb00f888.png)
+![Project Overview](https://user-images.githubusercontent.com/49556058/213899672-7d83a298-28b1-4706-80ea-9625eb00f888.png)
 
 # Introduction: 
 ![Intoduction](https://user-images.githubusercontent.com/49556058/213899508-ec46ddc5-50f5-406d-83bc-4bc2fdebec10.png)
