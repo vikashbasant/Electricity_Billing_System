@@ -184,6 +184,6 @@
         3. Then simply run this proect:
         
 ## If you want to run any project with .jar file then see the documentation which given jetbrains:
-    [link]https://www.jetbrains.com/help/idea/creating-and-running-your-first-java-application.html#run_jar_artifact
+    [click link](https://www.jetbrains.com/help/idea/creating-and-running-your-first-java-application.html#run_jar_artifact)
     
 
