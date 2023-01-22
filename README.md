@@ -80,35 +80,45 @@
 
 
 ## How To Run Java Desktop Application: 
-   ## 1. First Run About.java
+   ### 1. First Run About.java
    ![About](https://user-images.githubusercontent.com/49556058/213900108-d12082b9-51fb-4cc9-9772-484ac269c9ca.png)
 
-   ## 2. After Click on Button Get Started, Open Splash Frame
+   ### 2. After Click on Button Get Started, Open Splash Frame
    ![Splash](https://user-images.githubusercontent.com/49556058/213900112-3deecf5a-47c0-4dd7-8ddf-391a7b994d5a.png)
 
-   ## 3. After 5 sec, automatically open login frame.
+   ### 3. After 5 sec, automatically open login frame.
    ![Login](https://user-images.githubusercontent.com/49556058/213900121-a3c52fda-4dff-4ae8-bec6-a32c13c684cd.png)
 
-   ## 4. On this frame either you login with admin or customer aur you can signup frame or cancel.
-   ### 1. Once successfully login with admin:
-   #### You have shown 3 menu i.e Master, Utility, Logout
+   ### 4. On this frame either you login with admin or customer aur you can signup with admin or customer or cancel.
+   
+   #### 1. Once successfully login with admin:
+   
+   ##### You have shown 3 menu i.e Master, Utility, Logout
    ![image](https://user-images.githubusercontent.com/49556058/213900149-3f548026-fc52-42d2-a4f9-917df2379275.png)
-    ##### 1. Inside Master menu:
-    ##### 1. New Customer: For adding new customer
+    ###### 1. Inside Master menu:
+    ####### 1. New Customer: 
+                For adding new customer
         ![new customer](https://user-images.githubusercontent.com/49556058/213900173-8c5ab6aa-6a75-48c7-87a7-ab1bb44bd3b8.png)
-        # 2. Customer Details: For see the customer details
+    ####### 2. Customer Details: 
+                For see the customer details
         ![customer details](https://user-images.githubusercontent.com/49556058/213900186-0a8b54dc-972c-477f-b9af-426eeb3f359a.png)
-        # 3. Deposit Details: For see the depeosit details of customer
+    ####### 3. Deposit Details: 
+                For see the depeosit details of customer
         ![deposit details](https://user-images.githubusercontent.com/49556058/213900199-9b7d1437-b7a3-4d7c-aa17-ac3e07cd965f.png)
-        # 4. Calculate Bill: For the calculate the bill of customer which consume by them.
+    ####### 4. Calculate Bill: 
+                For the calculate the bill of customer which consume by them.
         ![calculate bill](https://user-images.githubusercontent.com/49556058/213900215-298485c0-e0d1-4cd8-a840-862f3ed08400.png)
-        # 2. Inside Utility menu:
-          # 1. Notepad: For uses of notepad simply open by click
+    ###### 2. Inside Utility menu:
+          ####### 1. Notepad: 
+                    For uses of notepad simply open by click
             ![notepad](https://user-images.githubusercontent.com/49556058/213900239-f789471f-c865-4ad5-be1c-d039e382c408.png)
-          # 2. Calculator: For uses of calculator simply open by click
+          ####### 2. Calculator: 
+                    For uses of calculator simply open by click
             ![calculator](https://user-images.githubusercontent.com/49556058/213900247-f39483a2-9e97-4494-ae46-6399fd86f353.png)
-          # 3. Web Browser: For uses of Web Browser simply click on it.
-        # 3. Inisde Logout: simply logout the from admin, again open the login frame
+          ####### 3. Web Browser: 
+                    For uses of Web Browser simply click on it.
+    ###### 3. Inisde Logout: 
+                simply logout the from admin, again open the login frame
       
    # 2. Once successfully login with customer:
    # You have shown 5 menu with Information, User, Report, Utility, Logout
