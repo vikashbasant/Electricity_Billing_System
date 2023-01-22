@@ -20,46 +20,46 @@
 # Project Steup: 
 ![Project Setup](https://user-images.githubusercontent.com/49556058/213899784-514c4ea9-52f9-4182-9744-26be3d08e62c.png)
 
-For Electricity Billing System Project Database:
+#For Electricity Billing System Project Database:
 
-0. (mysql-connector-java-8.0.28.jar and rs2xml.jar) these libraries are used in this project:
-    For Databases connection
-    For Tables creation:
+    0. (mysql-connector-java-8.0.28.jar and rs2xml.jar) these libraries are used in this project:
+        For Databases connection
+        For Tables creation:
 
-Execute theses Queries one by one in our MySql database:
+    Execute theses Queries one by one in our MySql database:
 
-1. Create Database
+    1. Create Database
 
-    create database ebs;
+        create database ebs;
 
-2. Use the Database you have just Created:
+    2. Use the Database you have just Created:
 
-    use ebs;
+        use ebs;
 
-3. Create login Table to Store the information of the user:
+    3. Create login Table to Store the information of the user:
 
-    create table login(meter_no varchar(20), username varchar(30), name varchar(30), password varchar(30), user varchar
-    (30));
+        create table login(meter_no varchar(20), username varchar(30), name varchar(30), password varchar(30), user varchar
+        (30));
 
-4. Create customer Table to store the information of customer:
+    4. Create customer Table to store the information of customer:
 
-    create table customer(name varchar(30), meter varchar(20), address varchar(50), city varchar(20), state varchar(30), email varchar(30), phone varchar(20));
+        create table customer(name varchar(30), meter varchar(20), address varchar(50), city varchar(20), state varchar(30), email varchar(30), phone varchar(20));
 
-5. Create meter_info table to store the meter information of the customer:
+    5. Create meter_info table to store the meter information of the customer:
 
-    create table meter_info(meter_number varchar(20), meter_location varchar(20), meter_type varchar(20), phase_code varchar(20), bill_type varchar(20), days varchar(20));
+        create table meter_info(meter_number varchar(20), meter_location varchar(20), meter_type varchar(20), phase_code varchar(20), bill_type varchar(20), days varchar(20));
 
-6. Create tax Table to store the current tax structure:
+    6. Create tax Table to store the current tax structure:
 
-    create table tax(cost_per_unit varchar(20), meter_rent varchar(20), service_charge varchar(20), service_tax varchar(20), swachh_bharat_cess varchar(20), fixed_tax varchar(20));
+        create table tax(cost_per_unit varchar(20), meter_rent varchar(20), service_charge varchar(20), service_tax varchar(20), swachh_bharat_cess varchar(20), fixed_tax varchar(20));
 
-7. Insert some values into tax table:
+    7. Insert some values into tax table:
 
-    insert into tax_table values('9', '47', '22', '57', '6', '18');
+        insert into tax_table values('9', '47', '22', '57', '6', '18');
 
-8. Create bill table to store the billing information of the customer:
+    8. Create bill table to store the billing information of the customer:
 
-    create table bill(meter varchar(20), month varchar(20), units varchar(20), total_bill varchar(20), status varchar(20));
+        create table bill(meter varchar(20), month varchar(20), units varchar(20), total_bill varchar(20), status varchar(20));
     
     
 # Components:
