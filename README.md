@@ -165,10 +165,25 @@
    ###### 2. Calculator: 
             For uses of calculator simply open by click
    ![calculator](https://user-images.githubusercontent.com/49556058/213900247-f39483a2-9e97-4494-ae46-6399fd86f353.png)
+   
    ###### 3. Web Browser: 
             For uses of Web Browser simply click on it.
    ##### 5. Inisde Logout: 
             simply logout the from admin, again open the login frame
    #### 3. If click on Cancel Buttton: 
             Then Simply close the application.
+            
+            
+            
+## If you want to run this project with .jar file:
+    1. Clone this project into your local system:
+    2. Then Create the connection with database i.e mysql, and create the database and table related with this project which is mention above for database.
+    3. To run a Java application packaged in a JAR, IntelliJ IDEA allows you to create a dedicated run configuration.
+        1. Press Ctrl+Shift+A, find and run the Edit Configurations action.
+        2. In the Run/Debug Configurations dialog, click the Add button and select JAR Application i.e Electricity_Billing_System.jar
+        3. Then simply run this proect:
+        
+## If you want to run any project with .jar file then see the documentation which given jetbrains:
+    [link]https://www.jetbrains.com/help/idea/creating-and-running-your-first-java-application.html#run_jar_artifact
+    
 
