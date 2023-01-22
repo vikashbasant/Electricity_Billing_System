@@ -122,31 +122,53 @@
    ##### 3. Inisde Logout: 
                 simply logout the from admin, again open the login frame
       
-   # 2. Once successfully login with customer:
-   # You have shown 5 menu with Information, User, Report, Utility, Logout
+   #### 2. Once successfully login with customer:
+   
+   ##### You have shown 5 menu with Information, User, Report, Utility, Logout
    ![customer](https://user-images.githubusercontent.com/49556058/213900430-922b755a-0be3-4237-9278-ee58a42c442d.png)
-        # 1. Inside Information Menu:
-          # 1. Update Information: If you want update the information of the user:
-            ![update customer information](https://user-images.githubusercontent.com/49556058/213900581-d525a445-9843-4dbc-8a5a-62479eb79a25.png)
-          # 2. View Information: If you want see the information of the user:
-            ![view customer information](https://user-images.githubusercontent.com/49556058/213900612-4cb89c1c-2408-4409-8709-2c85922e4b26.png)
-        # 2. Inside User Menu:
-          # 1. Pay Bill: For Pay the Bill of the user
-            ![pay bill](https://user-images.githubusercontent.com/49556058/213900659-6fe62c43-61ff-436d-93f0-395625c82f5b.png)
-          # 2. Bill Details: For See the Bill Details of the user
-            ![bill details](https://user-images.githubusercontent.com/49556058/213900683-e9585a48-59aa-496c-ac84-d01c748075dd.png)
-        # 3. Inside Report Menu:
-          # 1. Generate Bill: For Generate the Bill for the specific Month
-            ![generate bill](https://user-images.githubusercontent.com/49556058/213900733-21a4cb6d-8fe4-42b7-a8ea-9ae3f153880d.png)
-          # 2. Last Bill: For See the all previous Bill of the User
-            ![last bill](https://user-images.githubusercontent.com/49556058/213900815-4cfcf6e5-c16a-46cb-b09b-307fee863054.png)
-        # 4. Inside Utility menu:
-          # 1. Notepad: For uses of notepad simply open by click
-            ![notepad](https://user-images.githubusercontent.com/49556058/213900239-f789471f-c865-4ad5-be1c-d039e382c408.png)
-          # 2. Calculator: For uses of calculator simply open by click
-            ![calculator](https://user-images.githubusercontent.com/49556058/213900247-f39483a2-9e97-4494-ae46-6399fd86f353.png)
-          # 3. Web Browser: For uses of Web Browser simply click on it.
-        # 5. Inisde Logout: simply logout the from admin, again open the login frame
-    # 3. If click on Cancel Buttton: 
-      Then Simply close the application.
+   
+   ##### 1. Inside Information Menu:
+   
+   ###### 1. Update Information: 
+            If you want update the information of the user:
+   ![update customer information](https://user-images.githubusercontent.com/49556058/213900581-d525a445-9843-4dbc-8a5a-62479eb79a25.png)
+   
+   ###### 2. View Information: 
+            If you want see the information of the user:
+   ![view customer information](https://user-images.githubusercontent.com/49556058/213900612-4cb89c1c-2408-4409-8709-2c85922e4b26.png)
+   
+   ##### 2. Inside User Menu:
+   ###### 1. Pay Bill: 
+            For Pay the Bill of the user
+   ![pay bill](https://user-images.githubusercontent.com/49556058/213900659-6fe62c43-61ff-436d-93f0-395625c82f5b.png)
+   
+   ###### 2. Bill Details: 
+            For See the Bill Details of the user
+   ![bill details](https://user-images.githubusercontent.com/49556058/213900683-e9585a48-59aa-496c-ac84-d01c748075dd.png)
+   
+   ##### 3. Inside Report Menu:
+   
+   ###### 1. Generate Bill: 
+            For Generate the Bill for the specific Month
+   ![generate bill](https://user-images.githubusercontent.com/49556058/213900733-21a4cb6d-8fe4-42b7-a8ea-9ae3f153880d.png)
+   
+   ###### 2. Last Bill: 
+            For See the all previous Bill of the User
+   ![last bill](https://user-images.githubusercontent.com/49556058/213900815-4cfcf6e5-c16a-46cb-b09b-307fee863054.png)
+   
+   ##### 4. Inside Utility menu:
+   
+   ###### 1. Notepad: 
+            For uses of notepad simply open by click
+   ![notepad](https://user-images.githubusercontent.com/49556058/213900239-f789471f-c865-4ad5-be1c-d039e382c408.png)
+   
+   ###### 2. Calculator: 
+            For uses of calculator simply open by click
+   ![calculator](https://user-images.githubusercontent.com/49556058/213900247-f39483a2-9e97-4494-ae46-6399fd86f353.png)
+   ###### 3. Web Browser: 
+            For uses of Web Browser simply click on it.
+   ##### 5. Inisde Logout: 
+            simply logout the from admin, again open the login frame
+   #### 3. If click on Cancel Buttton: 
+            Then Simply close the application.
 
