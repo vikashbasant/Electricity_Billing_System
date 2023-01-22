@@ -20,7 +20,7 @@
 # Project Steup: 
 ![Project Setup](https://user-images.githubusercontent.com/49556058/213899784-514c4ea9-52f9-4182-9744-26be3d08e62c.png)
 
-#For Electricity Billing System Project Database:
+# For Electricity Billing System Project Database:
 
     0. (mysql-connector-java-8.0.28.jar and rs2xml.jar) these libraries are used in this project:
         For Databases connection
@@ -68,20 +68,20 @@
 
 # Application Flow Diagram:
 
-An electricity billing system in Java flow diagram would typically involve the following steps:
+    An electricity billing system in Java flow diagram would typically involve the following steps:
 
-    Data input: The customer's meter reading, name, address, and account number are entered into the system through a
+        Data input: The customer's meter reading, name, address, and account number are entered into the system through a
     user interface built using Java.
 
-    Bill calculation: The system calculates the bill amount using Java programming logic based on the meter reading, customer information, and the rates established by the utility company.
+        Bill calculation: The system calculates the bill amount using Java programming logic based on the meter reading, customer information, and the rates established by the utility company.
 
-    Bill generation: The system generates the bill in the form of a pdf or other document using Java libraries such as iText.
+        Bill generation: The system generates the bill in the form of a pdf or other document using Java libraries such as iText.
 
-    Bill distribution: The bill is distributed to the customer via email or an online portal built using Java technologies such as Servlets and JSP.
+        Bill distribution: The bill is distributed to the customer via email or an online portal built using Java technologies such as Servlets and JSP.
 
-    Payment processing: The customer can view and pay the bill using a Java-based web application that integrates with payment gateways.
+        Payment processing: The customer can view and pay the bill using a Java-based web application that integrates with payment gateways.
 
-    Payment confirmation: The system records the payment and updates the customer's account in the database using Java database connectivity (JDBC)
+        Payment confirmation: The system records the payment and updates the customer's account in the database using Java database connectivity (JDBC)
 
 
 
