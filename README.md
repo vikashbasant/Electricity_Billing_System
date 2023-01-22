@@ -87,17 +87,17 @@
 
 # How To Run Java Desktop Application: 
 
-  # First Run About.java
-        ![About](https://user-images.githubusercontent.com/49556058/213900108-d12082b9-51fb-4cc9-9772-484ac269c9ca.png)
+  # 1. First Run About.java
+   ![About](https://user-images.githubusercontent.com/49556058/213900108-d12082b9-51fb-4cc9-9772-484ac269c9ca.png)
 
-  # After Click on Button Get Started, Open Splash Frame
-        ![Splash](https://user-images.githubusercontent.com/49556058/213900112-3deecf5a-47c0-4dd7-8ddf-391a7b994d5a.png)
+  # 2. After Click on Button Get Started, Open Splash Frame
+   ![Splash](https://user-images.githubusercontent.com/49556058/213900112-3deecf5a-47c0-4dd7-8ddf-391a7b994d5a.png)
 
-  # After 5 sec, automatically open login frame.
-        ![Login](https://user-images.githubusercontent.com/49556058/213900121-a3c52fda-4dff-4ae8-bec6-a32c13c684cd.png)
+  # 3. After 5 sec, automatically open login frame.
+   ![Login](https://user-images.githubusercontent.com/49556058/213900121-a3c52fda-4dff-4ae8-bec6-a32c13c684cd.png)
 
-  4. On this frame either you login with admin or customer aur you can signup frame or cancel.
-    1. Once successfully login with admin:
+  # 4. On this frame either you login with admin or customer aur you can signup frame or cancel.
+    # 1. Once successfully login with admin:
       1. You have shown 3 menu i.e Master, Utility, Logout
         ![image](https://user-images.githubusercontent.com/49556058/213900149-3f548026-fc52-42d2-a4f9-917df2379275.png)
         1. Inside Master menu:
