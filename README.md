@@ -100,15 +100,15 @@
    # 1. Once successfully login with admin:
    # You have shown 3 menu i.e Master, Utility, Logout
    ![image](https://user-images.githubusercontent.com/49556058/213900149-3f548026-fc52-42d2-a4f9-917df2379275.png)
-        # 1. Inside Master menu:
-          # 1. New Customer: For adding new customer
-            ![new customer](https://user-images.githubusercontent.com/49556058/213900173-8c5ab6aa-6a75-48c7-87a7-ab1bb44bd3b8.png)
-          # 2. Customer Details: For see the customer details
-            ![customer details](https://user-images.githubusercontent.com/49556058/213900186-0a8b54dc-972c-477f-b9af-426eeb3f359a.png)
-          # 3. Deposit Details: For see the depeosit details of customer
-            ![deposit details](https://user-images.githubusercontent.com/49556058/213900199-9b7d1437-b7a3-4d7c-aa17-ac3e07cd965f.png)
-          # 4. Calculate Bill: For the calculate the bill of customer which consume by them.
-            ![calculate bill](https://user-images.githubusercontent.com/49556058/213900215-298485c0-e0d1-4cd8-a840-862f3ed08400.png)
+    # 1. Inside Master menu:
+        # 1. New Customer: For adding new customer
+        ![new customer](https://user-images.githubusercontent.com/49556058/213900173-8c5ab6aa-6a75-48c7-87a7-ab1bb44bd3b8.png)
+        # 2. Customer Details: For see the customer details
+        ![customer details](https://user-images.githubusercontent.com/49556058/213900186-0a8b54dc-972c-477f-b9af-426eeb3f359a.png)
+        # 3. Deposit Details: For see the depeosit details of customer
+        ![deposit details](https://user-images.githubusercontent.com/49556058/213900199-9b7d1437-b7a3-4d7c-aa17-ac3e07cd965f.png)
+        # 4. Calculate Bill: For the calculate the bill of customer which consume by them.
+        ![calculate bill](https://user-images.githubusercontent.com/49556058/213900215-298485c0-e0d1-4cd8-a840-862f3ed08400.png)
         # 2. Inside Utility menu:
           # 1. Notepad: For uses of notepad simply open by click
             ![notepad](https://user-images.githubusercontent.com/49556058/213900239-f789471f-c865-4ad5-be1c-d039e382c408.png)
